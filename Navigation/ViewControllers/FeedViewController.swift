@@ -10,7 +10,9 @@ import UIKit
 
 final class FeedViewController: UIViewController {
   
-  let post = PostTitle(title: "Пост")
+  let post = PostTitle(title: "Some post title")
+  
+  var backgroundTask: UIBackgroundTaskIdentifier = .invalid
   
   private var buttonOne: UIButton = {
     let button = UIButton()
@@ -27,26 +29,36 @@ final class FeedViewController: UIViewController {
   }()
   
   @objc func buttonPressed(_ sender: UIButton) {
-    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    let postView = storyBoard.instantiateViewController(withIdentifier: "postView") as! PostViewController
+    let postView = PostViewController()
     postView.post = post
-    self.show(postView, sender: self)
-  }
-  
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    print(type(of: self), #function)
-  }
-  
-  required init?(coder: NSCoder) {
-    super.init(coder: coder)
-    print(type(of: self), #function)
+    self.navigationController?.pushViewController(postView, animated: true)
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setupLayout()
+    
+    print(type(of: self), #function)
+  }
+  
+  func registerBackgroundTask() {
+    backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+      self?.endBackgroundTask()
+    }
+    assert(backgroundTask != .invalid)
+  }
+    
+  func endBackgroundTask() {
+    print("Background task ended.")
+    UIApplication.shared.endBackgroundTask(backgroundTask)
+    backgroundTask = .invalid
+  }
+  
+  
+  private func setupLayout() {
+    view.backgroundColor = .systemTeal
+    title = "Feed"
     let stackView = UIStackView(arrangedSubviews: [buttonOne, buttonTwo])
     stackView.axis = .vertical
     stackView.spacing = 10.0
@@ -54,12 +66,13 @@ final class FeedViewController: UIViewController {
     stackView.toAutoLayout()
     stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
     stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-    
-    print(type(of: self), #function)
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    
+    registerBackgroundTask()
+    
     print(type(of: self), #function)
   }
   
@@ -70,6 +83,9 @@ final class FeedViewController: UIViewController {
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
+    
+    endBackgroundTask()
+    
     print(type(of: self), #function)
   }
   
@@ -77,14 +93,5 @@ final class FeedViewController: UIViewController {
     super.viewDidDisappear(animated)
     print(type(of: self), #function)
   }
-  
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    print(type(of: self), #function)
-  }
-  
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    print(type(of: self), #function)
-  }
+ 
 }

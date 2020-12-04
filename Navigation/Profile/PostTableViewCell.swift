@@ -69,7 +69,8 @@ class PostTableViewCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    self.backgroundColor = .systemGray6
+    self.backgroundColor = UIColor(named: "gray6")
+
     setupLayout()
   }
   

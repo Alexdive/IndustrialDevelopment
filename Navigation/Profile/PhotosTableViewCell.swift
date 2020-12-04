@@ -37,11 +37,11 @@ class PhotosTableViewCell: UITableViewCell {
   }()
   
   private lazy var arrowLabel: UIImageView = {
-    let largeConfig = UIImage.SymbolConfiguration(textStyle: .title3)
     let image = UIImageView()
     image.toAutoLayout()
     image.tintColor = .black
-    image.image = UIImage(systemName: "arrow.forward", withConfiguration: largeConfig)!
+    image.image = UIImage(named: "arrow.forward")!
+    image.contentMode = .scaleAspectFit
     return image
   }()
   

@@ -7,7 +7,7 @@
 //
 
 
-// код честно украден отсюда: https://medium.com/@vialyx/ios-dev-course-uitabbarcontroller-animated-transitioning-50b341a150d
+//  Animation took from: https://medium.com/@vialyx/ios-dev-course-uitabbarcontroller-animated-transitioning-50b341a150d
 
 import UIKit
 
@@ -16,6 +16,20 @@ class AnimatedTabBarController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
     delegate = self
+    
+    let item1 = FeedViewController()
+    let icon1 = UITabBarItem(title: "Feed", image: UIImage(named: "house.fill"), tag: 0)
+    item1.tabBarItem = icon1
+    let item2 = LogInViewController()
+    let icon2 = UITabBarItem(title: "Profile", image: UIImage(named: "person.fill"), tag: 1)
+    item2.tabBarItem = icon2
+    let controllers = [item1, item2]
+    self.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
   }
 }
 
@@ -49,4 +63,6 @@ final class TabBarAnimatedTransitioning: NSObject, UIViewControllerAnimatedTrans
     return 0.25
   }
 }
+
+
 
