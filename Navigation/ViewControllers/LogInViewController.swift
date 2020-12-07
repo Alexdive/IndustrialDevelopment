@@ -7,26 +7,24 @@
 //
 
 import UIKit
+import SnapKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
   
   // MARK: properties
   private lazy var scrollView: UIScrollView = {
     let scrollView = UIScrollView()
-    scrollView.toAutoLayout()
     scrollView.showsVerticalScrollIndicator = false
     return scrollView
   }()
   
   private let contentView: UIView = {
     let view = UIView()
-    view.toAutoLayout()
     return view
   }()
   
   private var logoVKImage: UIImageView = {
     let imageView = UIImageView()
-    imageView.toAutoLayout()
     imageView.image = #imageLiteral(resourceName: "logo")
     imageView.contentMode = .scaleAspectFit
     return imageView
@@ -53,7 +51,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
   
   private var logInButton: UIButton = {
     let button = UIButton()
-    button.toAutoLayout()
     button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
     button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .disabled)
     button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .selected)
@@ -127,8 +124,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
   @objc private func logInButtonAction() {
     print("logged in")
     self.navigationController?.pushViewController(profileView, animated: true)
-//    let galleryVC = PhotosViewController()
-//    self.navigationController?.pushViewController(galleryVC, animated: true)
     passwordTextField.resignFirstResponder()
     logInTextField.resignFirstResponder()
   }
@@ -147,8 +142,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
   // MARK: Layout
   private func setupLayout() {
     
+    let baseInset: CGFloat = 16
+    
     let stackView = UIStackView(arrangedSubviews: [logInTextField, passwordTextField])
-    stackView.toAutoLayout()
     stackView.axis = .vertical
     stackView.spacing = 0
     stackView.makeRoundedCornerWithBorder(cornerRadius: 10, borderWidth: 0.5, borderColor: UIColor.lightGray.cgColor)
@@ -159,37 +155,36 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     contentView.addSubview(stackView)
     contentView.addSubview(logInButton)
     
-    let constraints = [
-      scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-      
-      contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-      contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-      contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-      contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-      contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-      
-      logoVKImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
-      logoVKImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-      logoVKImage.widthAnchor.constraint(equalToConstant: 100),
-      logoVKImage.heightAnchor.constraint(equalToConstant: 100),
-      
-      logInTextField.heightAnchor.constraint(equalToConstant: 50),
-      passwordTextField.heightAnchor.constraint(equalToConstant: 50),
-      stackView.topAnchor.constraint(equalTo: logoVKImage.bottomAnchor, constant: 120),
-      stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-      stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-      
-      logInButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
-      logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-      logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-      logInButton.heightAnchor.constraint(equalToConstant: 50),
-      logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-    ]
-    
-    NSLayoutConstraint.activate(constraints)
+    scrollView.snp.makeConstraints { (make) -> Void in
+      make.edges.equalTo(view)
+    }
+    contentView.snp.makeConstraints { (make) -> Void in
+      make.edges.equalToSuperview()
+      make.width.equalToSuperview()
+    }
+    logoVKImage.snp.makeConstraints { (make) -> Void in
+      make.top.equalToSuperview().offset(120)
+      make.centerX.equalToSuperview()
+      make.width.height.equalTo(100)
+    }
+    logInTextField.snp.makeConstraints { (make) in
+      make.height.equalTo(50.5)
+    }
+    passwordTextField.snp.makeConstraints { (make) in
+      make.height.equalTo(50)
+    }
+    stackView.snp.makeConstraints { (make) in
+      make.top.equalTo(logoVKImage.snp_bottom).offset(120)
+      make.left.equalToSuperview().offset(baseInset)
+      make.right.equalToSuperview().offset(-baseInset)
+    }
+    logInButton.snp.makeConstraints { (make) in
+      make.top.equalTo(stackView.snp_bottom).offset(baseInset)
+      make.left.equalToSuperview().offset(baseInset)
+      make.right.equalToSuperview().offset(-baseInset)
+      make.height.equalTo(50)
+      make.bottom.equalToSuperview()
+    }
   }
 }
 
