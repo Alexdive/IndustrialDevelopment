@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class SetStatusButtonView: UIButton {
   
   override init(frame: CGRect) {

@@ -18,7 +18,13 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
   
   weak var delegate: ProfileTableViewDelegate?
   
-  let avatarImageHeight: CGFloat = 110
+  var avatarImageHeight: CGFloat = 110
+  var avatarImageWidth: CGFloat = 110
+  
+  var avatarTopConstraint: Constraint? = nil
+  var avatarleadingConstraint: Constraint? = nil
+  var avatarWidthConstraint: Constraint? = nil
+  var avatarHeightConstraint: Constraint? = nil
   
   private lazy var avatarImageView: UIImageView = {
     let avatar = UIImageView()
@@ -139,15 +145,24 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
                                  y: safeAreaInsets.top + 16,
                                  width: 30,
                                  height: 30)
+    avatarImageHeight = avatarFrame.height
+    avatarImageWidth = avatarFrame.width
     
-    avatarImageView.translatesAutoresizingMaskIntoConstraints = true
     avatarImageView.isUserInteractionEnabled = false
     
+    avatarImageView.snp.remakeConstraints { (make) in
+      self.avatarTopConstraint = make.top.equalTo(avatarFrame.minY).constraint
+      self.avatarleadingConstraint = make.left.equalToSuperview().constraint
+      self.avatarHeightConstraint = make.height.equalTo(avatarImageHeight).constraint
+      self.avatarWidthConstraint = make.width.equalTo(avatarImageWidth).constraint
+    }
+    setNeedsLayout()
+    
     UIView.animate(withDuration: 0.5) { [self] in
+      layoutIfNeeded()
       transparentView.backgroundColor = .init(white: 1, alpha: 0.8)
       avatarImageView.layer.cornerRadius = 0
       avatarImageView.layer.borderWidth = 0
-      avatarImageView.frame = avatarFrame
     }
     UIView.animate(withDuration: 0.3, delay: 0.5) {
       self.dismissButton.alpha = 1
@@ -157,22 +172,29 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
   @objc func dismissFullscreenImage() {
     delegate?.didTapAvatarButton()
     
+    avatarImageHeight = 110
+    avatarImageWidth = 110
+    addSubview(avatarImageView)
+    
+    avatarImageView.snp.remakeConstraints { (make) -> Void in
+      self.avatarTopConstraint = make.top.equalToSuperview().offset(16).constraint
+      self.avatarleadingConstraint = make.left.equalToSuperview().offset(16).constraint
+      self.avatarHeightConstraint = make.height.equalTo(avatarImageHeight).constraint
+      self.avatarWidthConstraint = make.width.equalTo(avatarImageWidth).constraint
+    }
+    setNeedsLayout()
+    
+    avatarImageView.isUserInteractionEnabled = true
+    
     UIView.animate(withDuration: 0.3) {
       self.dismissButton.alpha = 0
     }
     UIView.animate(withDuration: 0.5, delay: 0.3) { [self] in
-      avatarImageView.contentMode = .scaleAspectFill
-      avatarImageView.frame = CGRect(x: 16,
-                                     y: 16,
-                                     width: avatarImageHeight,
-                                     height: avatarImageHeight)
+      layoutIfNeeded()
       avatarImageView.layer.cornerRadius = avatarImageHeight/2
       transparentView.backgroundColor = .init(white: 1, alpha: 0)
     } completion: { [self] _ in
       avatarImageView.layer.borderWidth = 3
-      addSubview(avatarImageView)
-      avatarImageView.toAutoLayout()
-      avatarImageView.isUserInteractionEnabled = true
       transparentView.removeFromSuperview()
     }
   }
@@ -189,9 +211,10 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     addSubview(statusTextField)
     
     avatarImageView.snp.makeConstraints { (make) -> Void in
-      make.top.equalToSuperview().offset(baseInset)
-      make.left.equalToSuperview().offset(baseInset)
-      make.width.height.equalTo(avatarImageHeight)
+      self.avatarTopConstraint = make.top.equalToSuperview().offset(baseInset).constraint
+      self.avatarleadingConstraint = make.left.equalToSuperview().offset(baseInset).constraint
+      self.avatarHeightConstraint = make.height.equalTo(avatarImageHeight).constraint
+      self.avatarWidthConstraint = make.width.equalTo(avatarImageWidth).constraint
     }
     nameLabel.snp.makeConstraints { (make) in
       make.top.equalToSuperview().offset(27)
