@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+  func checkLogin(enteredLogin: String) -> Bool
+  func checkPassword(enteredPswd: String) -> Bool
+}
+
 class LogInViewController: UIViewController, UITextFieldDelegate {
+  
+  weak var delegate: LoginViewControllerDelegate?
   
   // MARK: properties
   private lazy var scrollView: UIScrollView = {
@@ -79,6 +86,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     self.logInTextField.delegate = self
     self.passwordTextField.delegate = self
     
+    print(self)
+    print(self.delegate as Any)
+    
     /// Keyboard observers
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -124,10 +134,17 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
   }
   
   @objc private func logInButtonAction() {
-    print("logged in")
-    self.navigationController?.pushViewController(profileView, animated: true)
-//    let galleryVC = PhotosViewController()
-//    self.navigationController?.pushViewController(galleryVC, animated: true)
+    
+//    self.navigationController?.pushViewController(profileView, animated: true)
+    
+//    if loginIsEntered && passwordIsEntered {
+      
+    print(self.delegate as Any)
+//      if (delegate?.checkLogin(enteredLogin: logInTextField.text!))! && (delegate?.checkPassword(enteredPswd: passwordTextField.text!))! {
+//        print("logged in")
+//      }
+//    }
+    
     passwordTextField.resignFirstResponder()
     logInTextField.resignFirstResponder()
   }
