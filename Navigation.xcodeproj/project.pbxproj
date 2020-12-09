@@ -714,7 +714,7 @@
 			repositoryURL = "https://github.com/TrueMax/iOSIntPackage/";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.1;
+				minimumVersion = 2.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

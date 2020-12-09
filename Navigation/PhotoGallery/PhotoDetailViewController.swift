@@ -12,7 +12,15 @@ import SnapKit
 
 class PhotoDetailViewController: UIViewController {
   
-  let filtersNames = ["Gaussian Blur", "Motion Blur", "Monochrome", "Posterize", "Color Invert", "Sepia Tone", "Transfer", "Noir", "Tonal", "Process", "Chrome", "Fade", "Crystallize", "Bloom", "Vignette", "No filter"]
+//  struct GenericRow<T> {
+//    let type: T
+//    let title: String
+//  }
+  
+  var filterItems = ColorFilter.allCases
+  
+  
+//  let filtersNames = ["Gaussian Blur", "Motion Blur", "Monochrome", "Posterize", "Color Invert", "Sepia Tone", "Transfer", "Noir", "Tonal", "Process", "Chrome", "Fade", "Crystallize", "Bloom", "Vignette", "No filter"]
   
   private let imageProcessor = ImageProcessor()
   
@@ -36,6 +44,7 @@ class PhotoDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    filterItems.append(.bloom(intensity: 0))
     tableView.dataSource = self
     tableView.delegate = self
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Filter")
@@ -144,12 +153,21 @@ extension PhotoDetailViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return filtersNames.count
+//    return filtersNames.count
+    return filterItems.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = self.tableView.dequeueReusableCell(withIdentifier: "Filter", for: indexPath)
-    cell.textLabel?.text = filtersNames[indexPath.row]
+//    cell.textLabel?.text = filtersNames[indexPath.row]
+    
+    if indexPath.row == filterItems.count - 1 {
+      cell.textLabel?.text = "No filter"
+    } else {
+      if let filterName = String(describing: filterItems[indexPath.row]).components(separatedBy: "(").first?.capitalized {
+        cell.textLabel?.text = filterName
+      }
+    }
     cell.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     let backgroundView = UIView()
     backgroundView.backgroundColor = UIColor(named: "blueVK")
@@ -165,41 +183,42 @@ extension PhotoDetailViewController: UITableViewDataSource {
 extension PhotoDetailViewController {
   
   func chooseFilterForRow(index: IndexPath) {
-    var filter: ColorFilter
-    switch index.row {
-    case 0:
-      filter = ColorFilter.gaussianBlur(radius: 10)
-    case 1:
-      filter = ColorFilter.motionBlur(radius: 10)
-    case 2:
-      filter = ColorFilter.monochrome(color: .gray, intensity: 0.7)
-    case 3:
-      filter = ColorFilter.posterize
-    case 4:
-      filter = ColorFilter.colorInvert
-    case 5:
-      filter = ColorFilter.sepia(intensity: 0.8)
-    case 6:
-      filter = ColorFilter.transfer
-    case 7:
-      filter = ColorFilter.noir
-    case 8:
-      filter = ColorFilter.tonal
-    case 9:
-      filter = ColorFilter.process
-    case 10:
-      filter = ColorFilter.chrome
-    case 11:
-      filter = ColorFilter.fade
-    case 12:
-      filter = ColorFilter.crystallize(radius: 20)
-    case 13:
-      filter = ColorFilter.bloom(intensity: 0.7)
-    case 14:
-      filter = ColorFilter.vignette(intensity: 0.8, radius: 500)
-    default:
-      filter = ColorFilter.gaussianBlur(radius: 0)
-    }
+//    var filter: ColorFilter
+//    switch index.row {
+//    case 0:
+//      filter = ColorFilter.gaussianBlur(radius: 10)
+//    case 1:
+//      filter = ColorFilter.motionBlur(radius: 10)
+//    case 2:
+//      filter = ColorFilter.monochrome(color: .gray, intensity: 0.7)
+//    case 3:
+//      filter = ColorFilter.posterize
+//    case 4:
+//      filter = ColorFilter.colorInvert
+//    case 5:
+//      filter = ColorFilter.sepia(intensity: 0.8)
+//    case 6:
+//      filter = ColorFilter.transfer
+//    case 7:
+//      filter = ColorFilter.noir
+//    case 8:
+//      filter = ColorFilter.tonal
+//    case 9:
+//      filter = ColorFilter.process
+//    case 10:
+//      filter = ColorFilter.chrome
+//    case 11:
+//      filter = ColorFilter.fade
+//    case 12:
+//      filter = ColorFilter.crystallize(radius: 20)
+//    case 13:
+//      filter = ColorFilter.bloom(intensity: 0.7)
+//    case 14:
+//      filter = ColorFilter.vignette(intensity: 0.8, radius: 500)
+//    default:
+//      filter = ColorFilter.gaussianBlur(radius: 0)
+//    }
+    let filter = filterItems[index.row]
     print(filter)
     if let image = photo?.photo {
       imageProcessor.processImage(sourceImage: image, filter: filter) { (image) in
