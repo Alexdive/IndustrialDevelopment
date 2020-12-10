@@ -17,12 +17,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let _ = (scene as? UIWindowScene) else { return }
     
     let validator = LoginValidator()
+    let presenter = PostPresenter()
     
     if let tabController = window?.rootViewController as? AnimatedTabBarController, let loginNavigation = tabController.viewControllers?.last as? UINavigationController, let loginController = loginNavigation.viewControllers.first as? LogInViewController {
-      print(loginController)
+   
       loginController.delegate = validator
-      print(loginController.delegate as Any)
     }
+    if let tabController = window?.rootViewController as? AnimatedTabBarController, let feedNavigation = tabController.viewControllers?.first as? UINavigationController, let feedController = feedNavigation.viewControllers.first as? FeedViewController {
+   
+      feedController.output = presenter
+    }
+    
   }
 
     func sceneDidDisconnect(_ scene: UIScene) {

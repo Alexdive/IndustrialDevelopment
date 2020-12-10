@@ -25,14 +25,11 @@ class Checker {
 class LoginValidator: LoginViewControllerDelegate {
   
   func checkLogin(enteredLogin: String) -> Bool {
-    print("L delegate")
     return Checker.shared.checkCredentials(enteredString: enteredLogin)
   }
   
   func checkPassword(enteredPswd: String) -> Bool {
-    print("P delegate")
     return Checker.shared.checkCredentials(enteredString: enteredPswd)
   }
-  
-  
 }
+

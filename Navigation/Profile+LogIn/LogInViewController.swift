@@ -15,7 +15,7 @@ protocol LoginViewControllerDelegate: AnyObject {
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
   
-  weak var delegate: LoginViewControllerDelegate?
+   var delegate: LoginViewControllerDelegate?
   
   // MARK: properties
   private lazy var scrollView: UIScrollView = {
@@ -126,7 +126,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
   @objc private func passwordTextEntered(_ textField: UITextField) {
     if let text = passwordTextField.text, !text.isEmpty {
       passwordIsEntered = true
-      print("Password entered")
+      logInButtonAction()
     } else {
       passwordTextField.placeholder = "Password can't be empty!"
       passwordTextField.becomeFirstResponder()
@@ -135,15 +135,30 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
   
   @objc private func logInButtonAction() {
     
-//    self.navigationController?.pushViewController(profileView, animated: true)
-    
-//    if loginIsEntered && passwordIsEntered {
-      
-    print(self.delegate as Any)
-//      if (delegate?.checkLogin(enteredLogin: logInTextField.text!))! && (delegate?.checkPassword(enteredPswd: passwordTextField.text!))! {
-//        print("logged in")
-//      }
-//    }
+    if loginIsEntered && passwordIsEntered {
+      if let loginText = logInTextField.text, let pswdText = passwordTextField.text {
+        if let loginIsValid = delegate?.checkLogin(enteredLogin: loginText), let pswdIsValid = delegate?.checkPassword(enteredPswd: pswdText) {
+          if loginIsValid && pswdIsValid {
+            
+            let prefs:UserDefaults = UserDefaults.standard
+            prefs.set(true, forKey: "isLoggedIn")
+            
+            self.navigationController?.pushViewController(profileView, animated: true)
+            print("logged in")
+          } else {
+            let alertController = UIAlertController(title: "Ooops!\nWrong login or password!", message: "Please try again.", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "ОK", style: .default) { _ in
+              self.logInTextField.becomeFirstResponder()
+            }
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+          }
+        }
+      }
+    } else {
+      logInTextField.placeholder = "Login can't be empty!"
+      passwordTextField.placeholder = "Password can't be empty!"
+    }
     
     passwordTextField.resignFirstResponder()
     logInTextField.resignFirstResponder()
