@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class PostTableViewCell: UITableViewCell {
   
@@ -15,7 +16,6 @@ class PostTableViewCell: UITableViewCell {
     label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
     label.textColor = .black
     label.numberOfLines = 2
-    label.toAutoLayout()
     return label
   }()
   
@@ -24,7 +24,6 @@ class PostTableViewCell: UITableViewCell {
     label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
     label.textColor = .systemGray
     label.numberOfLines = 0
-    label.toAutoLayout()
     return label
   }()
   
@@ -32,7 +31,6 @@ class PostTableViewCell: UITableViewCell {
     let imageView = UIImageView()
     imageView.contentMode = .scaleAspectFit
     imageView.backgroundColor = .black
-    imageView.toAutoLayout()
     return imageView
   }()
   
@@ -94,15 +92,12 @@ class PostTableViewCell: UITableViewCell {
     let likesStackView = UIStackView(arrangedSubviews: [likesLabel, likesCountLabel])
     likesStackView.axis = .horizontal
     likesStackView.spacing = 4
-    likesStackView.toAutoLayout()
     
     let viewsStackView = UIStackView(arrangedSubviews: [viewsLabel, viewsCountLabel])
     viewsStackView.axis = .horizontal
     viewsStackView.spacing = 4
-    viewsStackView.toAutoLayout()
     
-    let indent: CGFloat = 16
-    let imageWidth: NSLayoutDimension = contentView.widthAnchor
+    let baseInset: CGFloat = 16
     
     contentView.addSubview(authorNameLabel)
     contentView.addSubview(descriptionLabel)
@@ -110,29 +105,28 @@ class PostTableViewCell: UITableViewCell {
     contentView.addSubview(likesStackView)
     contentView.addSubview(viewsStackView)
     
-    let constraints = [
-      
-      authorNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: indent),
-      authorNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: indent),
-      authorNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -indent),
-      
-      postImageView.topAnchor.constraint(equalTo: authorNameLabel.bottomAnchor, constant: 12),
-      postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-      postImageView.widthAnchor.constraint(equalTo: imageWidth),
-      postImageView.heightAnchor.constraint(equalTo: imageWidth),
-      
-      descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: indent),
-      descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: indent),
-      descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -indent),
-      
-      likesStackView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: indent),
-      likesStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: indent),
-      
-      viewsStackView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: indent),
-      viewsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -indent),
-      viewsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -indent)
-      
-    ]
-    NSLayoutConstraint.activate(constraints)
+    authorNameLabel.snp.makeConstraints { (make) in
+      make.top.left.equalToSuperview().offset(baseInset)
+      make.right.equalToSuperview().offset(-baseInset)
+    }
+    postImageView.snp.makeConstraints { (make) in
+      make.top.equalTo(authorNameLabel.snp_bottom).offset(12)
+      make.left.equalToSuperview()
+      make.width.equalToSuperview()
+      make.height.equalTo(postImageView.snp_width)
+    }
+    descriptionLabel.snp.makeConstraints { (make) in
+      make.top.equalTo(postImageView.snp_bottom).offset(baseInset)
+      make.left.equalToSuperview().offset(baseInset)
+      make.right.equalToSuperview().offset(-baseInset)
+    }
+    likesStackView.snp.makeConstraints { (make) in
+      make.top.equalTo(descriptionLabel.snp_bottom).offset(baseInset)
+      make.left.equalToSuperview().offset(baseInset)
+    }
+    viewsStackView.snp.makeConstraints { (make) in
+      make.top.equalTo(descriptionLabel.snp_bottom).offset(baseInset)
+      make.right.bottom.equalToSuperview().offset(-baseInset)
+    }
   }
 }

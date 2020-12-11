@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SnapKit
 
 class PhotosTableViewCell: UITableViewCell {
   
@@ -21,7 +21,6 @@ class PhotosTableViewCell: UITableViewCell {
       photo.image = PhotosStorage.imageNames[i].photo
       stack.addArrangedSubview(photo)
     }
-    stack.toAutoLayout()
     stack.axis = .horizontal
     stack.distribution = .fillEqually
     return stack
@@ -29,7 +28,6 @@ class PhotosTableViewCell: UITableViewCell {
   
   private lazy var photoLabel: UILabel = {
     let label = UILabel()
-    label.toAutoLayout()
     label.text = "Photos"
     label.textColor = .black
     label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
@@ -38,7 +36,6 @@ class PhotosTableViewCell: UITableViewCell {
   
   private lazy var arrowLabel: UIImageView = {
     let image = UIImageView()
-    image.toAutoLayout()
     image.tintColor = .black
     image.image = UIImage(named: "arrow.forward")!
     image.contentMode = .scaleAspectFit
@@ -51,7 +48,6 @@ class PhotosTableViewCell: UITableViewCell {
     setupLayout()
     
     self.backgroundColor = .white
-    
   }
   
   required init?(coder: NSCoder) {
@@ -61,7 +57,7 @@ class PhotosTableViewCell: UITableViewCell {
   // MARK: Layout
   private func setupLayout() {
     
-    let indent: CGFloat = 12
+    let baseInset: CGFloat = 12
     let stackSpacing: CGFloat = 8
     
     stackPhotoView.spacing = stackSpacing
@@ -70,22 +66,21 @@ class PhotosTableViewCell: UITableViewCell {
     addSubview(photoLabel)
     addSubview(arrowLabel)
     
-    let constraints = [
-      
-      photoLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: indent),
-      photoLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: indent),
-      
-      arrowLabel.centerYAnchor.constraint(equalTo: photoLabel.centerYAnchor),
-      arrowLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -indent),
-      
-      stackPhotoView.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: indent),
-      stackPhotoView.leadingAnchor.constraint(equalTo: photoLabel.leadingAnchor),
-      stackPhotoView.trailingAnchor.constraint(equalTo: arrowLabel.trailingAnchor),
-      stackPhotoView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -indent),
-      stackPhotoView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25, constant: -(stackSpacing*3 + indent*2)/4)
-      
-    ]
-    NSLayoutConstraint.activate(constraints)
+    photoLabel.snp.makeConstraints { (make) in
+      make.top.equalToSuperview().offset(baseInset)
+      make.left.equalToSuperview().offset(baseInset)
+    }
+    arrowLabel.snp.makeConstraints { (make) in
+      make.centerY.equalTo(photoLabel.snp.centerY)
+      make.right.equalToSuperview().offset(-baseInset)
+    }
+    stackPhotoView.snp.makeConstraints { (make) in
+      make.top.equalTo(photoLabel.snp_bottom).offset(baseInset)
+      make.left.equalTo(photoLabel.snp_left)
+      make.right.equalTo(arrowLabel.snp_right)
+      make.bottom.equalToSuperview().offset(-baseInset)
+      make.height.equalTo(self.snp_width).dividedBy(4).offset(-(stackSpacing*3 + baseInset*2)/4)
+    }
   }
 }
 

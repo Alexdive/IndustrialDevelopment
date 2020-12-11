@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileViewController: UIViewController {
   
@@ -39,7 +40,7 @@ class ProfileViewController: UIViewController {
   
   // MARK: Layout
   private func setupTableView() {
-    tableView.toAutoLayout()
+    
     tableView.dataSource = self
     tableView.delegate = self
     tableView.register(PostTableViewCell.self, forCellReuseIdentifier: reuseID)
@@ -50,13 +51,9 @@ class ProfileViewController: UIViewController {
     
     view.addSubview(tableView)
     
-    let constratints = [
-      tableView.topAnchor.constraint(equalTo: view.topAnchor),
-      tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-    ]
-    NSLayoutConstraint.activate(constratints)
+    tableView.snp.makeConstraints { (make) -> Void in
+      make.edges.equalTo(view)
+    }
   }
 }
 

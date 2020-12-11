@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class FeedViewController: UIViewController {
   
@@ -59,13 +60,17 @@ final class FeedViewController: UIViewController {
   private func setupLayout() {
     view.backgroundColor = .systemTeal
     title = "Feed"
+    
     let stackView = UIStackView(arrangedSubviews: [buttonOne, buttonTwo])
     stackView.axis = .vertical
     stackView.spacing = 10.0
+    
     view.addSubview(stackView)
-    stackView.toAutoLayout()
-    stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-    stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+
+    stackView.snp.makeConstraints { (make) in
+      make.center.equalToSuperview()
+    }
+
   }
   
   override func viewWillAppear(_ animated: Bool) {
