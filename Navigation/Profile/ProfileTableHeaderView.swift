@@ -76,8 +76,8 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
   
   private lazy var dismissButton: UIButton = {
     let button = UIButton()
-    let largeConfig = UIImage.SymbolConfiguration(textStyle: .title1)
-    button.setImage(UIImage(systemName: "xmark.circle", withConfiguration: largeConfig), for: .normal)
+    button.setImage(UIImage(named: "xmark.circle"), for: .normal)
+    button.imageView?.contentMode = .scaleAspectFill
     button.tintColor = .black
     button.addTarget(self, action: #selector(dismissFullscreenImage), for: .touchUpInside)
     button.alpha = 0
@@ -92,7 +92,8 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     setupLayout()
     
-    self.backgroundColor = .systemGray6
+    self.backgroundColor = UIColor(named: "gray6")
+
     self.statusTextField.delegate = self
     
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapAvatar))
@@ -137,16 +138,16 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     transparentView.addSubview(avatarImageView)
     transparentView.bringSubviewToFront(avatarImageView)
     transparentView.frame = UIScreen.main.bounds
-    dismissButton.frame = CGRect(x: transparentView.frame.maxX - 56,
+    dismissButton.frame = CGRect(x: transparentView.frame.maxX - 46,
                                  y: safeAreaInsets.top + 16,
-                                 width: 40,
-                                 height: 40)
+                                 width: 30,
+                                 height: 30)
+    
     avatarImageView.translatesAutoresizingMaskIntoConstraints = true
+    avatarImageView.isUserInteractionEnabled = false
     
     UIView.animate(withDuration: 0.5) { [self] in
       transparentView.backgroundColor = .init(white: 1, alpha: 0.8)
-      
-      self.layoutIfNeeded()
       avatarImageView.layer.cornerRadius = 0
       avatarImageView.layer.borderWidth = 0
       avatarImageView.frame = avatarFrame
@@ -163,7 +164,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
       self.dismissButton.alpha = 0
     }
     UIView.animate(withDuration: 0.5, delay: 0.3) { [self] in
-      self.avatarImageView.contentMode = .scaleAspectFill
+      avatarImageView.contentMode = .scaleAspectFill
       avatarImageView.frame = CGRect(x: 16,
                                      y: 16,
                                      width: avatarImageHeight,
@@ -174,6 +175,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
       avatarImageView.layer.borderWidth = 3
       addSubview(avatarImageView)
       avatarImageView.toAutoLayout()
+      avatarImageView.isUserInteractionEnabled = true
       transparentView.removeFromSuperview()
     }
   }

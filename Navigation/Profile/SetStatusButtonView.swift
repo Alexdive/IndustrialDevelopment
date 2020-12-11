@@ -22,7 +22,6 @@ class SetStatusButtonView: UIButton {
     self.layer.shadowRadius = 4
     self.layer.shadowColor = UIColor.black.cgColor
     self.layer.shadowOpacity = 0.7
-    
   }
   
   

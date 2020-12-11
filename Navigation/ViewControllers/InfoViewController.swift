@@ -10,12 +10,26 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
-    override func viewDidLoad() {
+  private lazy var button: UIButton = UIButton(frame: CGRect(
+                                                x: view.bounds.width / 2 - 50,
+                                                y: view.bounds.height / 2 - 50,
+                                                width: 100,
+                                                height: 50))
+  
+      override func viewDidLoad() {
         super.viewDidLoad()
 
+      view.backgroundColor = .lightGray
+        
+      button.backgroundColor = .darkGray
+        button.layer.cornerRadius = 25
+        button.clipsToBounds = true
+      button.setTitle("Tap me", for: .normal)
+      button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
+      self.view.addSubview(button)
     }
     
-    @IBAction func showAlert(_ sender: Any) {
+  @objc private func showAlert() {
         let alertController = UIAlertController(title: "Удалить пост?", message: "Пост нельзя будет восстановить", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Отмена", style: .default) { _ in
             print("Отмена")

@@ -12,7 +12,7 @@ import UIKit
 extension UITextField {
   func logInProperties(placeholder: String) {
     self.toAutoLayout()
-    self.backgroundColor = .systemGray6
+    self.backgroundColor = UIColor(named: "gray6")
     self.placeholder = placeholder
     self.textColor = .black
     self.tintColor = UIColor(named: "blueVK")
