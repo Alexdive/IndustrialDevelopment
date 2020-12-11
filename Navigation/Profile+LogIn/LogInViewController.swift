@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+  func checkLogin(enteredLogin: String) -> Bool
+  func checkPassword(enteredPswd: String) -> Bool
+}
+
 class LogInViewController: UIViewController, UITextFieldDelegate {
+  
+   var delegate: LoginViewControllerDelegate?
   
   // MARK: properties
   private lazy var scrollView: UIScrollView = {
@@ -79,6 +86,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     self.logInTextField.delegate = self
     self.passwordTextField.delegate = self
     
+    print(self)
+    print(self.delegate as Any)
+    
     /// Keyboard observers
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -116,7 +126,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
   @objc private func passwordTextEntered(_ textField: UITextField) {
     if let text = passwordTextField.text, !text.isEmpty {
       passwordIsEntered = true
-      print("Password entered")
+      logInButtonAction()
     } else {
       passwordTextField.placeholder = "Password can't be empty!"
       passwordTextField.becomeFirstResponder()
@@ -124,10 +134,32 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
   }
   
   @objc private func logInButtonAction() {
-    print("logged in")
-    self.navigationController?.pushViewController(profileView, animated: true)
-//    let galleryVC = PhotosViewController()
-//    self.navigationController?.pushViewController(galleryVC, animated: true)
+    
+    if loginIsEntered && passwordIsEntered {
+      if let loginText = logInTextField.text, let pswdText = passwordTextField.text {
+        if let loginIsValid = delegate?.checkLogin(enteredLogin: loginText), let pswdIsValid = delegate?.checkPassword(enteredPswd: pswdText) {
+          if loginIsValid && pswdIsValid {
+            
+            let prefs:UserDefaults = UserDefaults.standard
+            prefs.set(true, forKey: "isLoggedIn")
+            
+            self.navigationController?.pushViewController(profileView, animated: true)
+            print("logged in")
+          } else {
+            let alertController = UIAlertController(title: "Ooops!\nWrong login or password!", message: "Please try again.", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "ОK", style: .default) { _ in
+              self.logInTextField.becomeFirstResponder()
+            }
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+          }
+        }
+      }
+    } else {
+      logInTextField.placeholder = "Login can't be empty!"
+      passwordTextField.placeholder = "Password can't be empty!"
+    }
+    
     passwordTextField.resignFirstResponder()
     logInTextField.resignFirstResponder()
   }
