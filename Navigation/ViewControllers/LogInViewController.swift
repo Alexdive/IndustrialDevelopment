@@ -11,6 +11,8 @@ import SnapKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
   
+  weak var coordinator: NavCoordinator?
+  
   // MARK: properties
   private lazy var scrollView: UIScrollView = {
     let scrollView = UIScrollView()

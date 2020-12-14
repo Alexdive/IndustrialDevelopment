@@ -11,6 +11,8 @@ import SnapKit
 
 final class FeedViewController: UIViewController {
   
+  weak var coordinator: NavCoordinator?
+  
   let post = PostTitle(title: "Some post title")
   
   var backgroundTask: UIBackgroundTaskIdentifier = .invalid

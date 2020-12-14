@@ -12,11 +12,20 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
+  var coordinator: MainCoordinator?
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
+    let rootController = AnimatedTabBarController()
+    
+    coordinator = MainCoordinator(tabBarController: rootController)
+    
+    rootController.coordinator = coordinator
+    
+    coordinator?.start()
+    
     window = UIWindow(frame: UIScreen.main.bounds)
-    window?.rootViewController = AnimatedTabBarController()
+    window?.rootViewController = rootController
     window?.makeKeyAndVisible()
     
     return true

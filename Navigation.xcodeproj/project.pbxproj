@@ -15,6 +15,10 @@
 		060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782C7250CEE5D00A87020 /* PostViewController.swift */; };
 		060782CA250CEE7200A87020 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782C9250CEE7200A87020 /* Post.swift */; };
 		061F9BCA14896F97721D47C2 /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CE1F02D7A9FF45DC988A40 /* Pods_Navigation.framework */; };
+		5001CEC82586F91E005CF7E6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5001CEC72586F91E005CF7E6 /* MainCoordinator.swift */; };
+		5001CECC2586F932005CF7E6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5001CECB2586F932005CF7E6 /* Coordinator.swift */; };
+		5001CED52586FED7005CF7E6 /* FeedNavCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5001CED42586FED7005CF7E6 /* FeedNavCoordinator.swift */; };
+		5001CEEE25874AE0005CF7E6 /* ProfileNavCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5001CEED25874AE0005CF7E6 /* ProfileNavCoordinator.swift */; };
 		5017A8D2255C1080000240C4 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5017A8D1255C1080000240C4 /* LogInViewController.swift */; };
 		5017A8D5255C112B000240C4 /* UIView+Style+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5017A8D4255C112B000240C4 /* UIView+Style+AutoLayout.swift */; };
 		503F37C72558104200C6DBB7 /* AnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503F37C62558104200C6DBB7 /* AnimatedTabBarController.swift */; };
@@ -70,6 +74,10 @@
 		060782C9250CEE7200A87020 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		223740C2725765D7C878019A /* Pods-Navigation2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation2.debug.xcconfig"; path = "Target Support Files/Pods-Navigation2/Pods-Navigation2.debug.xcconfig"; sourceTree = "<group>"; };
 		33CE1F02D7A9FF45DC988A40 /* Pods_Navigation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Navigation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5001CEC72586F91E005CF7E6 /* MainCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		5001CECB2586F932005CF7E6 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		5001CED42586FED7005CF7E6 /* FeedNavCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNavCoordinator.swift; sourceTree = "<group>"; };
+		5001CEED25874AE0005CF7E6 /* ProfileNavCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavCoordinator.swift; sourceTree = "<group>"; };
 		5017A8D1255C1080000240C4 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		5017A8D4255C112B000240C4 /* UIView+Style+AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Style+AutoLayout.swift"; sourceTree = "<group>"; };
 		503F37C62558104200C6DBB7 /* AnimatedTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabBarController.swift; sourceTree = "<group>"; };
@@ -140,6 +148,7 @@
 			children = (
 				50406FDC255D442A00B4E543 /* ViewControllers */,
 				504B0E07254D1DC4003D2A9A /* Profile */,
+				5001CEC62586F8ED005CF7E6 /* Coordinator */,
 				509DE2AD2565344300E876CD /* PhotoGallery */,
 				50406FD6255D43B900B4E543 /* Models */,
 				50406FDB255D440600B4E543 /* Storage */,
@@ -149,6 +158,17 @@
 				060782BF250CE27A00A87020 /* Info.plist */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		5001CEC62586F8ED005CF7E6 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				5001CECB2586F932005CF7E6 /* Coordinator.swift */,
+				5001CEC72586F91E005CF7E6 /* MainCoordinator.swift */,
+				5001CED42586FED7005CF7E6 /* FeedNavCoordinator.swift */,
+				5001CEED25874AE0005CF7E6 /* ProfileNavCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		50406FD6255D43B900B4E543 /* Models */ = {
@@ -419,17 +439,21 @@
 				509DE2B6256537C300E876CD /* PhotosCollectionViewCell.swift in Sources */,
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
+				5001CEC82586F91E005CF7E6 /* MainCoordinator.swift in Sources */,
 				509DE2AB25650DA200E876CD /* PhotosTableViewCell.swift in Sources */,
 				060782CA250CEE7200A87020 /* Post.swift in Sources */,
+				5001CED52586FED7005CF7E6 /* FeedNavCoordinator.swift in Sources */,
 				509DE2B3256535E900E876CD /* Photos.swift in Sources */,
 				50406FDF255D5C0800B4E543 /* SetStatusButtonView.swift in Sources */,
 				503F37C72558104200C6DBB7 /* AnimatedTabBarController.swift in Sources */,
 				50406FD8255D43F600B4E543 /* Storage.swift in Sources */,
 				50406FE3255D78E900B4E543 /* PostTableViewCell.swift in Sources */,
 				509DE2AF256534D200E876CD /* PhotosViewController.swift in Sources */,
+				5001CEEE25874AE0005CF7E6 /* ProfileNavCoordinator.swift in Sources */,
 				504B0E09254D1EB1003D2A9A /* ProfileTableHeaderView.swift in Sources */,
 				504B0E0B254D1ED2003D2A9A /* ProfileViewController.swift in Sources */,
 				509DE2C325664A8900E876CD /* PhotoDetailViewController.swift in Sources */,
+				5001CECC2586F932005CF7E6 /* Coordinator.swift in Sources */,
 				5017A8D2255C1080000240C4 /* LogInViewController.swift in Sources */,
 				5017A8D5255C112B000240C4 /* UIView+Style+AutoLayout.swift in Sources */,
 				509DE2A525650B1800E876CD /* UITextField+AppStyle.swift in Sources */,

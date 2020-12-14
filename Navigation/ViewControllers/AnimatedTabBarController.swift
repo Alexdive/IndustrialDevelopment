@@ -13,29 +13,27 @@ import UIKit
 
 class AnimatedTabBarController: UITabBarController {
   
+  weak var coordinator: TabCoordinator?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    delegate = self
-    
-    let item1 = FeedViewController()
-    let icon1 = UITabBarItem(title: "Feed", image: UIImage(named: "house.fill"), tag: 0)
-    item1.tabBarItem = icon1
-    let item2 = LogInViewController()
-    let icon2 = UITabBarItem(title: "Profile", image: UIImage(named: "person.fill"), tag: 1)
-    item2.tabBarItem = icon2
-    let controllers = [item1, item2]
-    self.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    
+//    delegate = self
   }
 }
+
 
 // MARK: - UITabBarControllerDelegate
 extension AnimatedTabBarController: UITabBarControllerDelegate {
   
+  // UITabBarDelegate
+  override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+      
+  }
+
+  // UITabBarControllerDelegate
+  func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+      
+  }
   
   func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     return TabBarAnimatedTransitioning()
