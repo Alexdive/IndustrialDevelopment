@@ -9,13 +9,13 @@
 import UIKit
 
 protocol LoginViewControllerDelegate: AnyObject {
-  func checkLogin(enteredLogin: String) -> Bool
-  func checkPassword(enteredPswd: String) -> Bool
+  func checkLogin(enteredLogin: String, completion: @escaping (Bool) -> ())
+  func checkPassword(enteredPswd: String, completion: @escaping (Bool) -> ())
 }
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
   
-   var delegate: LoginViewControllerDelegate?
+  var delegate: LoginViewControllerDelegate?
   
   // MARK: properties
   private lazy var scrollView: UIScrollView = {
@@ -137,23 +137,25 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     if loginIsEntered && passwordIsEntered {
       if let loginText = logInTextField.text, let pswdText = passwordTextField.text {
-        if let loginIsValid = delegate?.checkLogin(enteredLogin: loginText), let pswdIsValid = delegate?.checkPassword(enteredPswd: pswdText) {
-          if loginIsValid && pswdIsValid {
-            
-            let prefs:UserDefaults = UserDefaults.standard
-            prefs.set(true, forKey: "isLoggedIn")
-            
-            self.navigationController?.pushViewController(profileView, animated: true)
-            print("logged in")
-          } else {
-            let alertController = UIAlertController(title: "Ooops!\nWrong login or password!", message: "Please try again.", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "ОK", style: .default) { _ in
-              self.logInTextField.becomeFirstResponder()
+        delegate?.checkLogin(enteredLogin: loginText, completion: { [weak self] loginIsValid in
+          self?.delegate?.checkPassword(enteredPswd: pswdText, completion: { pswdIsValid in
+            guard let self = self else { return }
+            if loginIsValid && pswdIsValid {
+              let prefs: UserDefaults = UserDefaults.standard
+              prefs.set(true, forKey: "isLoggedIn")
+              
+              self.navigationController?.pushViewController(self.profileView, animated: true)
+              print("logged in")
+            } else {
+              let alertController = UIAlertController(title: "Ooops!\nWrong login or password!", message: "Please try again.", preferredStyle: .alert)
+              let cancelAction = UIAlertAction(title: "ОK", style: .default) { _ in
+                self.logInTextField.becomeFirstResponder()
+              }
+              alertController.addAction(cancelAction)
+              self.present(alertController, animated: true, completion: nil)
             }
-            alertController.addAction(cancelAction)
-            self.present(alertController, animated: true, completion: nil)
-          }
-        }
+          })
+        })
       }
     } else {
       logInTextField.placeholder = "Login can't be empty!"
@@ -162,6 +164,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     passwordTextField.resignFirstResponder()
     logInTextField.resignFirstResponder()
+    
   }
   
   // MARK: Keyboard actions
