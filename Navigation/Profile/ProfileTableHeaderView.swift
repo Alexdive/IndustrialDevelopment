@@ -173,7 +173,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     delegate?.didTapAvatarButton()
     
     avatarImageHeight = 110
-    avatarImageWidth = 110
+    avatarImageWidth = avatarImageHeight
     addSubview(avatarImageView)
     
     avatarImageView.snp.remakeConstraints { (make) -> Void in

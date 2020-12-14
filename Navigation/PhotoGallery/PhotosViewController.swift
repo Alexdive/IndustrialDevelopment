@@ -10,6 +10,8 @@ import UIKit
 
 class PhotosViewController: UIViewController {
   
+  weak var coordinator: ProfileNavCoordinator?
+  
   private lazy var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     let colView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -74,9 +76,9 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
   private var baseInset: CGFloat { return 8 }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let photoDetailVC = PhotoDetailViewController()
-    photoDetailVC.photo = PhotosStorage.imageNames[indexPath.item]
-    navigationController?.pushViewController(photoDetailVC, animated: true)
+    
+    coordinator?.openPhotoDetails(index: indexPath)
+
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

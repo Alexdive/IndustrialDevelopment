@@ -11,6 +11,8 @@ import SnapKit
 
 class ProfileViewController: UIViewController {
   
+  weak var coordinator: ProfileNavCoordinator?
+  
   private let tableView = UITableView(frame: .zero, style: .grouped)
   private let headerView = ProfileHeaderView()
   private let photosTableView = PhotosTableViewCell()
@@ -104,8 +106,7 @@ extension ProfileViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard indexPath.section == 0 else { return }
-    let galleryVC = PhotosViewController()
-    navigationController?.pushViewController(galleryVC, animated: true)
+    coordinator?.openPhotoGallery()
   }
 }
 

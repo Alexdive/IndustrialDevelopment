@@ -30,32 +30,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     return true
   }
-  
-  
-  func applicationDidFinishLaunching(_ application: UIApplication) {
-    print(type(of: self), #function)
-  }
-  
-  func applicationDidBecomeActive(_ application: UIApplication) {
-    print(type(of: self), #function)
-  }
-  
-  func applicationWillResignActive(_ application: UIApplication) {
-    print(type(of: self), #function)
-  }
-  
-  func applicationDidEnterBackground(_ application: UIApplication) {
-//    30sec in background mode
-    print(type(of: self), #function)
-  }
-  
-  func applicationWillEnterForeground(_ application: UIApplication) {
-    print(type(of: self), #function)
-  }
-  
-  func applicationWillTerminate(_ application: UIApplication) {
-    print(type(of: self), #function)
-  }
-  
 }
 

@@ -148,8 +148,8 @@
 			children = (
 				50406FDC255D442A00B4E543 /* ViewControllers */,
 				504B0E07254D1DC4003D2A9A /* Profile */,
-				5001CEC62586F8ED005CF7E6 /* Coordinator */,
 				509DE2AD2565344300E876CD /* PhotoGallery */,
+				5001CEC62586F8ED005CF7E6 /* Coordinator */,
 				50406FD6255D43B900B4E543 /* Models */,
 				50406FDB255D440600B4E543 /* Storage */,
 				060782B1250CE27700A87020 /* AppDelegate.swift */,

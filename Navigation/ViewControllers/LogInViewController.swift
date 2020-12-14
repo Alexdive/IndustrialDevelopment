@@ -11,7 +11,7 @@ import SnapKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
   
-  weak var coordinator: NavCoordinator?
+  weak var coordinator: ProfileNavCoordinator?
   
   // MARK: properties
   private lazy var scrollView: UIScrollView = {
@@ -125,7 +125,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
   
   @objc private func logInButtonAction() {
     print("logged in")
-    self.navigationController?.pushViewController(profileView, animated: true)
+    
+    coordinator?.logIn()
+    
     passwordTextField.resignFirstResponder()
     logInTextField.resignFirstResponder()
   }

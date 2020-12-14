@@ -10,6 +10,8 @@ import UIKit
 
 class PostViewController: UIViewController {
   
+  weak var coordinator: FeedNavCoordinator?
+  
   var post: PostTitle?
   
   override func viewDidLoad() {
@@ -18,11 +20,9 @@ class PostViewController: UIViewController {
     title = post?.title
     
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showInfo))
-    
   }
   
   @objc func showInfo() {
-    let infoVC = InfoViewController()
-    present(infoVC, animated: true, completion: nil)
+    coordinator?.showInfo()
   }
 }

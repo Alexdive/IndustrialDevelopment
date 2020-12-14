@@ -16,9 +16,20 @@ class FeedNavCoordinator: NavCoordinator {
   }
   
   func start() {
-    print("Tab coordinator started")
     let vc = FeedViewController()
     vc.coordinator = self
-    navigationController.pushViewController(vc, animated: false)
+    push(vc: vc, animated: false)
+  }
+  
+  func showPost(post: PostTitle) {
+    let vc = PostViewController()
+    vc.coordinator = self
+    vc.post = post
+    push(vc: vc, animated: true)
+  }
+  
+  func showInfo() {
+    let vc = InfoViewController()
+      navigationController.present(vc, animated: true, completion: nil)
   }
 }

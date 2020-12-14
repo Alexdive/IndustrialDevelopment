@@ -17,3 +17,9 @@ protocol NavCoordinator: AnyObject {
   var navigationController: UINavigationController { get set }
   func start()
 }
+
+extension NavCoordinator {
+  func push(vc: UIViewController, animated: Bool) {
+    navigationController.pushViewController(vc, animated: animated)
+  }
+}

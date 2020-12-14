@@ -19,13 +19,10 @@ class MainCoordinator: TabCoordinator {
   
   func start() {
     
-    print("Tab coordinator started")
-    
     let feedNavController = UINavigationController()
     let icon1 = UITabBarItem(title: "Feed", image: UIImage(named: "house.fill"), tag: 0)
     feedNavController.tabBarItem = icon1
     let feedCoordinator = FeedNavCoordinator(navigationController: feedNavController)
-    
     
     let profileNavController = UINavigationController()
     let icon2 = UITabBarItem(title: "Profile", image: UIImage(named: "person.fill"), tag: 1)
@@ -38,6 +35,7 @@ class MainCoordinator: TabCoordinator {
     profileCoordinator.start()
  
     let controllers = [feedNavController, profileNavController]
+    
     tabBarController.viewControllers = controllers
   }
 }
