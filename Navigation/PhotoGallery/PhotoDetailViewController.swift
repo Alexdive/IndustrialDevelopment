@@ -35,14 +35,12 @@ class PhotoDetailViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    filterItems.append(.bloom(intensity: 0))
-    tableView.dataSource = self
-    tableView.delegate = self
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Filter")
-    
+
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(chooseFilter))
-    view.backgroundColor = .darkGray
+   
+    filterItems.append(.bloom(intensity: 0))
+    
+    setupTable()
     setupViews()
     photoImageView.enableZoom()
     
@@ -83,8 +81,16 @@ class PhotoDetailViewController: UIViewController {
     }
   }
   
+  func setupTable() {
+    tableView.dataSource = self
+    tableView.delegate = self
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Filter")
+  }
+  
   // MARK: Layout
   func setupViews() {
+    
+    view.backgroundColor = .darkGray
     
     tableView.alpha = 0
     tableView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)

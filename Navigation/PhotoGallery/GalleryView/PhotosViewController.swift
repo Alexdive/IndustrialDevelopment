@@ -13,22 +13,20 @@ class PhotosViewController: UIViewController {
   
   weak var coordinator: ProfileNavCoordinator?
   
+  // adding view model
   var vm: PhotosViewModel?
   
   private lazy var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     let colView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//    colView.backgroundColor = .white
     colView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: PhotosCollectionViewCell.self))
     colView.dataSource = self
     colView.delegate = self
     return colView
   }()
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     setupViews()
   }
   
@@ -57,14 +55,14 @@ extension PhotosViewController: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
+    //  getting info from view model
     return vm?.storage.imageNames.count ?? 0
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
-    
+    //  getting info from view model
     cell.photo = vm?.storage.imageNames[indexPath.item]
     
     return cell
@@ -77,7 +75,6 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
     coordinator?.openPhotoDetails(index: indexPath)
-
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
