@@ -15,6 +15,8 @@ class ProfileNavCoordinator: NavCoordinator {
     self.navigationController = navigationController
   }
   
+  let photoViewModel = PhotosViewModel()
+  
   func start() {
     let vc = LogInViewController()
     vc.coordinator = self
@@ -28,14 +30,16 @@ class ProfileNavCoordinator: NavCoordinator {
   }
   
   func openPhotoGallery() {
+    
     let vc = PhotosViewController()
+    vc.vm = photoViewModel
     vc.coordinator = self
     push(vc: vc, animated: true)
   }
   
   func openPhotoDetails(index: IndexPath) {
     let vc = PhotoDetailViewController()
-    vc.photo = PhotosStorage.imageNames[index.item]
+    vc.photo = photoViewModel.storage.imageNames[index.item]
     push(vc: vc, animated: true)
   }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 struct PhotosStorage {
-  static let imageNames: [Photo] = {
+   let imageNames: [Photo] = {
     var array: [Photo] = []
     for index in 1...20 {
       var imageName = "nudi\(index)"
@@ -19,4 +19,7 @@ struct PhotosStorage {
   }()
 }
 
+struct Photo {
+  let photo: UIImage
+}
 

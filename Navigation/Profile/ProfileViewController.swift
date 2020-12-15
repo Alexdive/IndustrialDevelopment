@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
   
   private let tableView = UITableView(frame: .zero, style: .grouped)
   private let headerView = ProfileHeaderView()
-  private let photosTableView = PhotosTableViewCell()
+  let photosTableView = PhotosTableViewCell()
   
   private var reuseID: String {
     return String(describing: PostTableViewCell.self)

@@ -11,6 +11,8 @@ import SnapKit
 
 class PhotosTableViewCell: UITableViewCell {
   
+  private let images = PhotosStorage()
+  
   private lazy var stackPhotoView: UIStackView = {
     let stack = UIStackView()
     for i in 0...3 {
@@ -18,7 +20,7 @@ class PhotosTableViewCell: UITableViewCell {
       photo.contentMode = .scaleAspectFill
       photo.layer.cornerRadius = 6
       photo.clipsToBounds = true
-      photo.image = PhotosStorage.imageNames[i].photo
+      photo.image = images.imageNames[i].photo
       stack.addArrangedSubview(photo)
     }
     stack.axis = .horizontal

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
   
@@ -14,7 +15,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
   private let photoImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.contentMode = .scaleAspectFill
-    imageView.toAutoLayout()
     imageView.clipsToBounds = true
     return imageView
   }()
@@ -29,7 +29,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     super.init(frame: frame)
     
     setupViews()
-    contentView.backgroundColor = .white
   }
   
   required init?(coder: NSCoder) {
@@ -38,15 +37,15 @@ class PhotosCollectionViewCell: UICollectionViewCell {
   
   // MARK: Layout
   func setupViews() {
+    contentView.backgroundColor = .white
     contentView.addSubview(photoImageView)
     
-    let constraints = [
-      photoImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-      photoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-      photoImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-      photoImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
-    ]
-    NSLayoutConstraint.activate(constraints)
+    photoImageView.snp.makeConstraints { (make) in
+      make.top.equalToSuperview()
+      make.centerX.equalToSuperview()
+      make.width.equalToSuperview()
+      make.height.equalToSuperview()
+    }
   }
 }
 

@@ -7,19 +7,21 @@
 //
 
 import UIKit
+import SnapKit
 
 class PhotosViewController: UIViewController {
   
   weak var coordinator: ProfileNavCoordinator?
   
+  var vm: PhotosViewModel?
+  
   private lazy var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     let colView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    colView.backgroundColor = .white
+//    colView.backgroundColor = .white
     colView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: PhotosCollectionViewCell.self))
     colView.dataSource = self
     colView.delegate = self
-    colView.toAutoLayout()
     return colView
   }()
   
@@ -40,15 +42,11 @@ class PhotosViewController: UIViewController {
   private func setupViews() {
     
     view.addSubview(collectionView)
+    collectionView.backgroundColor = vm?.backgroundColor
     
-    let constraints = [
-      collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-    ]
-    
-    NSLayoutConstraint.activate(constraints)
+    collectionView.snp.makeConstraints { make in
+      make.top.bottom.left.right.equalToSuperview()
+    }
   }
 }
 
@@ -59,14 +57,15 @@ extension PhotosViewController: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return PhotosStorage.imageNames.count
+
+    return vm?.storage.imageNames.count ?? 0
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
     
-    cell.photo = PhotosStorage.imageNames[indexPath.item]
+    cell.photo = vm?.storage.imageNames[indexPath.item]
     
     return cell
   }
