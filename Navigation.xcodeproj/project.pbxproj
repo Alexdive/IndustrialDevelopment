@@ -47,6 +47,7 @@
 		5040981D257A51FB00AED984 /* UIImageView+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509DE2A725650BB700E876CD /* UIImageView+Alpha.swift */; };
 		50409820257A51FB00AED984 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 060782BC250CE27A00A87020 /* LaunchScreen.storyboard */; };
 		50409821257A51FB00AED984 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 060782BA250CE27A00A87020 /* Assets.xcassets */; };
+		50492CEA261180F90094F179 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50492CE9261180F90094F179 /* NetworkService.swift */; };
 		504B0E09254D1EB1003D2A9A /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B0E08254D1EB1003D2A9A /* ProfileTableHeaderView.swift */; };
 		504B0E0B254D1ED2003D2A9A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B0E0A254D1ED2003D2A9A /* ProfileViewController.swift */; };
 		509DE2A525650B1800E876CD /* UITextField+AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509DE2A425650B1800E876CD /* UITextField+AppStyle.swift */; };
@@ -85,6 +86,7 @@
 		50406FE2255D78E900B4E543 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		50409825257A51FB00AED984 /* Navigation2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50409826257A51FB00AED984 /* Navigation copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Navigation copy-Info.plist"; path = "/Users/Alexpermiakov/Desktop/DEV/Netology/PromDev/Navigation copy-Info.plist"; sourceTree = "<absolute>"; };
+		50492CE9261180F90094F179 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		504B0E08254D1EB1003D2A9A /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		504B0E0A254D1ED2003D2A9A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		509DE2A425650B1800E876CD /* UITextField+AppStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+AppStyle.swift"; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		060782B0250CE27700A87020 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				50492CED261181020094F179 /* NetworkService */,
 				50406FDC255D442A00B4E543 /* FeedFlow */,
 				504B0E07254D1DC4003D2A9A /* ProfileFlow */,
 				509DE2AD2565344300E876CD /* PhotoGallery */,
@@ -248,6 +251,14 @@
 				060782C5250CEB0A00A87020 /* InfoViewController.swift */,
 			);
 			path = FeedFlow;
+			sourceTree = "<group>";
+		};
+		50492CED261181020094F179 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				50492CE9261180F90094F179 /* NetworkService.swift */,
+			);
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 		504B0E07254D1DC4003D2A9A /* ProfileFlow */ = {
@@ -504,6 +515,7 @@
 				5017A8D5255C112B000240C4 /* UIView+Style+AutoLayout.swift in Sources */,
 				509DE2A525650B1800E876CD /* UITextField+AppStyle.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,
+				50492CEA261180F90094F179 /* NetworkService.swift in Sources */,
 				509DE2A825650BB700E876CD /* UIImageView+Alpha.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
