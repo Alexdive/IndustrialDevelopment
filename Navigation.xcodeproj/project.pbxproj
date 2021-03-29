@@ -49,6 +49,9 @@
 		50409821257A51FB00AED984 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 060782BA250CE27A00A87020 /* Assets.xcassets */; };
 		50492CEA261180F90094F179 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50492CE9261180F90094F179 /* NetworkService.swift */; };
 		50492CF82611AA130094F179 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50492CF72611AA130094F179 /* UserModel.swift */; };
+		50492CFC2611B0A60094F179 /* PlanetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50492CFB2611B0A60094F179 /* PlanetModel.swift */; };
+		50492D012611B2CE0094F179 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50492D002611B2CE0094F179 /* FeedViewModel.swift */; };
+		50492D0B2611C3F80094F179 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50492D0A2611C3F80094F179 /* PostViewModel.swift */; };
 		504B0E09254D1EB1003D2A9A /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B0E08254D1EB1003D2A9A /* ProfileTableHeaderView.swift */; };
 		504B0E0B254D1ED2003D2A9A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B0E0A254D1ED2003D2A9A /* ProfileViewController.swift */; };
 		509DE2A525650B1800E876CD /* UITextField+AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509DE2A425650B1800E876CD /* UITextField+AppStyle.swift */; };
@@ -89,6 +92,9 @@
 		50409826257A51FB00AED984 /* Navigation copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Navigation copy-Info.plist"; path = "/Users/Alexpermiakov/Desktop/DEV/Netology/PromDev/Navigation copy-Info.plist"; sourceTree = "<absolute>"; };
 		50492CE9261180F90094F179 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		50492CF72611AA130094F179 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		50492CFB2611B0A60094F179 /* PlanetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetModel.swift; sourceTree = "<group>"; };
+		50492D002611B2CE0094F179 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		50492D0A2611C3F80094F179 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		504B0E08254D1EB1003D2A9A /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		504B0E0A254D1ED2003D2A9A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		509DE2A425650B1800E876CD /* UITextField+AppStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+AppStyle.swift"; sourceTree = "<group>"; };
@@ -248,9 +254,12 @@
 		50406FDC255D442A00B4E543 /* FeedFlow */ = {
 			isa = PBXGroup;
 			children = (
-				060782B5250CE27700A87020 /* FeedViewController.swift */,
 				50492CF72611AA130094F179 /* UserModel.swift */,
+				50492CFB2611B0A60094F179 /* PlanetModel.swift */,
+				060782B5250CE27700A87020 /* FeedViewController.swift */,
+				50492D002611B2CE0094F179 /* FeedViewModel.swift */,
 				060782C7250CEE5D00A87020 /* PostViewController.swift */,
+				50492D0A2611C3F80094F179 /* PostViewModel.swift */,
 				060782C5250CEB0A00A87020 /* InfoViewController.swift */,
 			);
 			path = FeedFlow;
@@ -494,6 +503,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50492D0B2611C3F80094F179 /* PostViewModel.swift in Sources */,
 				060782B6250CE27700A87020 /* FeedViewController.swift in Sources */,
 				509DE2B6256537C300E876CD /* PhotosCollectionViewCell.swift in Sources */,
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
@@ -510,7 +520,9 @@
 				50406FE3255D78E900B4E543 /* PostTableViewCell.swift in Sources */,
 				509DE2AF256534D200E876CD /* PhotosViewController.swift in Sources */,
 				5001CEEE25874AE0005CF7E6 /* ProfileNavCoordinator.swift in Sources */,
+				50492D012611B2CE0094F179 /* FeedViewModel.swift in Sources */,
 				50492CF82611AA130094F179 /* UserModel.swift in Sources */,
+				50492CFC2611B0A60094F179 /* PlanetModel.swift in Sources */,
 				504B0E09254D1EB1003D2A9A /* ProfileTableHeaderView.swift in Sources */,
 				504B0E0B254D1ED2003D2A9A /* ProfileViewController.swift in Sources */,
 				509DE2C325664A8900E876CD /* PhotoDetailViewController.swift in Sources */,

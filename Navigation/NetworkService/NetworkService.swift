@@ -10,7 +10,7 @@ import Foundation
 
 struct NetworkService {
     
-    static func fetchData(urlString: String?, completion: ((String) -> Void)?) {
+    static func fetchData(urlString: String?, completion: ((Data) -> Void)?) {
         if let urlString = urlString,
            let url = URL(string: urlString) {
             
@@ -32,19 +32,20 @@ struct NetworkService {
                     print("-------//-------")
                     print(String(data: data, encoding: .utf8)!)
                     
-                    let decoder = JSONDecoder()
-                    
-                    do {
-                        let user = try decoder.decode(UserModel.self, from: data)
-                        if let completion = completion {
-                            completion(user.title)
-                        }
-                    } catch let error as NSError {
-                        print(error.localizedDescription)
+                    if let completion = completion {
+                        completion(data)
                     }
                 }
             }.resume()
-            
         }
+    }
+}
+
+extension NetworkService {
+    static func toObject(json: Data) throws -> Dictionary<String, Any>? {
+        return try JSONSerialization.jsonObject(
+            with: json,
+            options: .mutableContainers
+        ) as? [String: Any]
     }
 }

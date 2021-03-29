@@ -8,13 +8,8 @@
 
 import Foundation
 
-struct UserModel: Codable {
+struct UserModel {
     let userID, id: Int
     let title: String
     let completed: Bool
-
-    enum CodingKeys: String, CodingKey {
-        case userID = "userId"
-        case id, title, completed
-    }
 }
