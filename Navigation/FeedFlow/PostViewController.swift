@@ -16,14 +16,17 @@ class PostViewController: UIViewController {
     
     var post: PostTitle?
     
-    var residents: [String] = [] {
+    var residentsUrl: [String] = [] {
         didSet {
+            residentsUrl.forEach { residents.append(SWCharacter(name: nil, url: $0)) }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.activityIndicator.stopAnimating()
             }
         }
     }
+    
+    var residents: [SWCharacter] = []
     
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let tableViewID = "tableViewID"
@@ -44,7 +47,7 @@ class PostViewController: UIViewController {
         viewModel?.fetchAndDecodeResidents(urlString: "https://swapi.dev/api/planets/1",
                                            completion: { arr in
                                             if let arr = arr {
-                                                self.residents = arr
+                                                self.residentsUrl = arr
                                             }
                                            })
     }
@@ -102,7 +105,7 @@ extension PostViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return residents.count
+        return residentsUrl.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,9 +118,12 @@ extension PostViewController: UITableViewDataSource {
         }
         ai.startAnimating()
         
-        viewModel?.fetchAndGetResidentName(urlString: residents[indexPath.row],
+        let strungUrl = residentsUrl[indexPath.row]
+    
+        viewModel?.fetchAndGetResidentName(urlString: strungUrl,
                                            completion: { [weak cell] name in
                                             guard let cell = cell else { return }
+                                            self.residents[indexPath.row].name = name
                                             DispatchQueue.main.async {
                                                 ai.stopAnimating()
                                                 cell.textLabel?.text = name

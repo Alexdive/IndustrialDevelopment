@@ -28,5 +28,6 @@ struct PlanetModel: Codable {
 }
 
 struct SWCharacter: Decodable {
-    let name: String
+    var name: String?
+    let url: String?
 }
