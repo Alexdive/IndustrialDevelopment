@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
   
@@ -30,6 +31,7 @@ class ProfileViewController: UIViewController {
     super.viewDidLoad()
     
     headerView.delegate = self
+    headerView.signOutButton.addTarget(self, action: #selector(onSignOut), for: .touchUpInside)
     
     setupTableView()
     setupLayout()
@@ -38,7 +40,30 @@ class ProfileViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.setNavigationBarHidden(true, animated: true)
+    
+    headerView.nameLabel.text = Auth.auth().currentUser?.email
+    
   }
+    
+    /// SIgn out
+      @objc func onSignOut() {
+        let alertController = UIAlertController(title: "Sign out.", message: "Are you sure?", preferredStyle: .actionSheet)
+          let cancelAction = UIAlertAction(title: "Cancel", style: .default) { _ in
+            print("Cancel")
+          }
+          let deleteAction = UIAlertAction(title: "Sign me out", style: .destructive) { _ in
+            let firebaseAuth = Auth.auth()
+           do {
+             try firebaseAuth.signOut()
+            print("Sign out")
+           } catch let signOutError as NSError {
+             print ("Error signing out: %@", signOutError)
+           }
+          }
+          alertController.addAction(cancelAction)
+          alertController.addAction(deleteAction)
+          self.present(alertController, animated: true, completion: nil)
+        }
   
   // MARK: Layout
   private func setupTableView() {

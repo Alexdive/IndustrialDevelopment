@@ -54,6 +54,11 @@
 		50492D0B2611C3F80094F179 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50492D0A2611C3F80094F179 /* PostViewModel.swift */; };
 		504B0E09254D1EB1003D2A9A /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B0E08254D1EB1003D2A9A /* ProfileTableHeaderView.swift */; };
 		504B0E0B254D1ED2003D2A9A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504B0E0A254D1ED2003D2A9A /* ProfileViewController.swift */; };
+		5075FCC926145414004D2045 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5075FCC826145414004D2045 /* GoogleService-Info.plist */; };
+		5075FCEF2614600E004D2045 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCED2614600E004D2045 /* CustomAlertView.swift */; };
+		5075FCF02614600E004D2045 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCEE2614600E004D2045 /* Modal.swift */; };
+		5075FCF4261460C2004D2045 /* ButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCF3261460C2004D2045 /* ButtonHelper.swift */; };
+		5075FD2426148CDA004D2045 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FD2326148CDA004D2045 /* Checker.swift */; };
 		509DE2A525650B1800E876CD /* UITextField+AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509DE2A425650B1800E876CD /* UITextField+AppStyle.swift */; };
 		509DE2A825650BB700E876CD /* UIImageView+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509DE2A725650BB700E876CD /* UIImageView+Alpha.swift */; };
 		509DE2AB25650DA200E876CD /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509DE2AA25650DA200E876CD /* PhotosTableViewCell.swift */; };
@@ -97,6 +102,11 @@
 		50492D0A2611C3F80094F179 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		504B0E08254D1EB1003D2A9A /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		504B0E0A254D1ED2003D2A9A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		5075FCC826145414004D2045 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5075FCED2614600E004D2045 /* CustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		5075FCEE2614600E004D2045 /* Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
+		5075FCF3261460C2004D2045 /* ButtonHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonHelper.swift; sourceTree = "<group>"; };
+		5075FD2326148CDA004D2045 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		509DE2A425650B1800E876CD /* UITextField+AppStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+AppStyle.swift"; sourceTree = "<group>"; };
 		509DE2A725650BB700E876CD /* UIImageView+Alpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Alpha.swift"; sourceTree = "<group>"; };
 		509DE2AA25650DA200E876CD /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
@@ -165,6 +175,7 @@
 				060782BA250CE27A00A87020 /* Assets.xcassets */,
 				060782BC250CE27A00A87020 /* LaunchScreen.storyboard */,
 				060782BF250CE27A00A87020 /* Info.plist */,
+				5075FCC826145414004D2045 /* GoogleService-Info.plist */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -220,6 +231,10 @@
 				509DE2A425650B1800E876CD /* UITextField+AppStyle.swift */,
 				509DE2A725650BB700E876CD /* UIImageView+Alpha.swift */,
 				5017A8D4255C112B000240C4 /* UIView+Style+AutoLayout.swift */,
+				5075FCF3261460C2004D2045 /* ButtonHelper.swift */,
+				5075FCED2614600E004D2045 /* CustomAlertView.swift */,
+				5075FCEE2614600E004D2045 /* Modal.swift */,
+				5075FD2326148CDA004D2045 /* Checker.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -403,6 +418,7 @@
 			files = (
 				060782BE250CE27A00A87020 /* LaunchScreen.storyboard in Resources */,
 				060782BB250CE27A00A87020 /* Assets.xcassets in Resources */,
+				5075FCC926145414004D2045 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,12 +523,14 @@
 				060782B6250CE27700A87020 /* FeedViewController.swift in Sources */,
 				509DE2B6256537C300E876CD /* PhotosCollectionViewCell.swift in Sources */,
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
+				5075FCEF2614600E004D2045 /* CustomAlertView.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				5001CF302588C38B005CF7E6 /* PhotosViewModel.swift in Sources */,
 				5001CEC82586F91E005CF7E6 /* MainCoordinator.swift in Sources */,
 				509DE2AB25650DA200E876CD /* PhotosTableViewCell.swift in Sources */,
 				060782CA250CEE7200A87020 /* Post.swift in Sources */,
 				5001CED52586FED7005CF7E6 /* FeedNavCoordinator.swift in Sources */,
+				5075FCF4261460C2004D2045 /* ButtonHelper.swift in Sources */,
 				509DE2B3256535E900E876CD /* Photos.swift in Sources */,
 				50406FDF255D5C0800B4E543 /* SetStatusButtonView.swift in Sources */,
 				503F37C72558104200C6DBB7 /* AnimatedTabBarController.swift in Sources */,
@@ -521,10 +539,12 @@
 				509DE2AF256534D200E876CD /* PhotosViewController.swift in Sources */,
 				5001CEEE25874AE0005CF7E6 /* ProfileNavCoordinator.swift in Sources */,
 				50492D012611B2CE0094F179 /* FeedViewModel.swift in Sources */,
+				5075FCF02614600E004D2045 /* Modal.swift in Sources */,
 				50492CF82611AA130094F179 /* UserModel.swift in Sources */,
 				50492CFC2611B0A60094F179 /* PlanetModel.swift in Sources */,
 				504B0E09254D1EB1003D2A9A /* ProfileTableHeaderView.swift in Sources */,
 				504B0E0B254D1ED2003D2A9A /* ProfileViewController.swift in Sources */,
+				5075FD2426148CDA004D2045 /* Checker.swift in Sources */,
 				509DE2C325664A8900E876CD /* PhotoDetailViewController.swift in Sources */,
 				5001CECC2586F932005CF7E6 /* Coordinator.swift in Sources */,
 				5017A8D2255C1080000240C4 /* LogInViewController.swift in Sources */,

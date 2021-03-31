@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 //enum AppConfiguration: String, CaseIterable {
 //    case first = "https://swapi.dev/api/people/1"
@@ -21,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var coordinator: MainCoordinator?
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    
+    FirebaseApp.configure()
     
     let rootController = AnimatedTabBarController()
     
