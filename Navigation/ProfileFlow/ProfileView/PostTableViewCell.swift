@@ -45,7 +45,7 @@ class PostTableViewCell: UITableViewCell {
   private let likesCountLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-    label.textColor = UIColor(named: "blueVK")
+    label.textColor = UIColor.AppColor.vkBlue
     return label
   }()
   
@@ -60,14 +60,14 @@ class PostTableViewCell: UITableViewCell {
   private let viewsCountLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-    label.textColor = UIColor(named: "blueVK")
+    label.textColor = UIColor.AppColor.vkBlue
     return label
   }()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    self.backgroundColor = UIColor(named: "gray6")
+    self.backgroundColor = UIColor.AppColor.lightGray
 
     setupLayout()
   }

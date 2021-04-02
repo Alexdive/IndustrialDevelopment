@@ -49,7 +49,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     setupLayout()
     
-    self.backgroundColor = .white
+    self.backgroundColor = UIColor.AppColor.white
   }
   
   required init?(coder: NSCoder) {

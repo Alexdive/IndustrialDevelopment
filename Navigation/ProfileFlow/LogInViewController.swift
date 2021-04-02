@@ -35,7 +35,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private var logInTextField: UITextField = {
         let textField = UITextField()
-        textField.logInProperties(placeholder: "Email or phone")
+        textField.logInTF()
+        textField.placeholder = "Enter email"
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.keyboardType = .emailAddress
@@ -46,7 +47,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private var passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.logInProperties(placeholder: "Password")
+        textField.logInTF()
+        textField.placeholder = "Enter password"
         textField.isSecureTextEntry = true
         textField.returnKeyType = UIReturnKeyType.go
         textField.addTarget(self, action: #selector(passwordTextEntered), for: .editingChanged)
@@ -56,10 +58,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private var logInButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
-        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .disabled)
-        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .selected)
-        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .highlighted)
+        button.setBackgroundColor(UIColor.AppColor.vkBlue, forState: .normal)
+        button.setBackgroundColor(UIColor.AppColor.vkBlue.withAlphaComponent(0.8), forState: .disabled)
+        button.setBackgroundColor(UIColor.AppColor.vkBlue.withAlphaComponent(0.8), forState: .selected)
+        button.setBackgroundColor(UIColor.AppColor.vkBlue.withAlphaComponent(0.8), forState: .highlighted)
         button.setTitle("Log in", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
@@ -81,7 +83,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         let button = UIButton()
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 14, weight: .light),
-            .foregroundColor: UIColor(named: "blueVK") ?? .systemBlue,
+            .foregroundColor: UIColor.AppColor.vkBlue,
             .underlineStyle: NSUnderlineStyle.single.rawValue]
         button.setAttributedTitle(
             NSMutableAttributedString(string: "Sign up", attributes: attributes),
@@ -129,6 +131,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == passwordTextField {
+            passwordTextField.text = ""
+            passwordTextField.backgroundColor = UIColor.AppColor.lightGray
+        }
+    }
+    
     @objc private func logInTextEntered(_ textField: UITextField) {
         if Checker.isValidEmail(email: logInTextField.text) {
             logInTextField.rightViewMode = .always
@@ -161,61 +170,18 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     @objc private func logInButtonAction() {
         if let login = logInTextField.text,
            let password = passwordTextField.text {
-            
-            Auth.auth().signIn(withEmail: login, password: password) { authResult, error in
-                if let error = error {
-                    print(error.localizedDescription)
-                    let alert = CustomAlert(title: "Wrong credentials",
-                                            message: "Register new account?\nTap cancel to try again",
-                                            leftBtnTitle: "Cancel",
-                                            rightBtnTitle: "Register",
-                                            leftBtnColor: .systemRed,
-                                            rightBtnColor: UIColor(named: "blueVK"),
-                                            textFieldPlaceholder: "Enter email",
-                                            textField2Placeholder: "Enter password",
-                                            text: login)
-                    alert.show(animated: true)
-                    alert.didEnterHandler = { login, passw in
-                        Auth.auth().createUser(withEmail: login, password: passw) { (authResult, error) in
-                            if let error = error {
-                                print(error.localizedDescription)
-                            } else {
-                                print("Created new user")
-                            }
-                        }
-                    }
-                    return
-                }
-                if let authResult = authResult {
-                    print("logged in \(String(describing: authResult.user.email))")
-                }
+            Checker.logIn(with: login, passw: password) { [weak self] text, color in
+                guard let self = self else { return }
+                self.infoLabel.text = text
+                self.passwordTextField.backgroundColor = color
             }
         }
-        
         passwordTextField.resignFirstResponder()
         logInTextField.resignFirstResponder()
     }
     
     @objc private func onSignUp() {
-        let alert = CustomAlert(title: "Register new account.",
-                                message: "Enter email and password",
-                                leftBtnTitle: "Cancel",
-                                rightBtnTitle: "Register",
-                                leftBtnColor: .systemRed,
-                                rightBtnColor: UIColor(named: "blueVK"),
-                                textFieldPlaceholder: "Enter email",
-                                textField2Placeholder: "Enter password",
-                                text: nil)
-        alert.show(animated: true)
-        alert.didEnterHandler = { login, passw in
-            Auth.auth().createUser(withEmail: login, password: passw) { (authResult, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    print("Created new user")
-                }
-            }
-        }
+        Checker.signUp()
     }
     
     // MARK: Keyboard actions

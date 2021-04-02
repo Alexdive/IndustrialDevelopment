@@ -8,11 +8,22 @@
 
 import UIKit
 
+enum ErrorMessage: String {
+    case emailAlreadyInUse = "This email is already registered!\n Try another one"
+    case none = ""
+}
+
 final class CustomAlert: UIView, Modal {
     
     // MARK: - Properties
     
     var didEnterHandler: ((String, String) -> Void)?
+    
+    var errorMessage = ErrorMessage.none {
+        didSet {
+            self.messageLabel.text = errorMessage.rawValue
+        }
+    }
     
     private var viewTranslation = CGPoint(x: 0, y: 0)
     
@@ -55,36 +66,29 @@ final class CustomAlert: UIView, Modal {
     
     private let textField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = #colorLiteral(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
-        textField.textColor = .darkGray
+        textField.logInTF()
         textField.font = UIFont.systemFont(ofSize: 16)
-        textField.tintColor = UIColor(named: "blueVK")
-        textField.setLeftPaddingPoints(18)
         textField.layer.cornerRadius = 12
         textField.clipsToBounds = true
+        textField.keyboardType = .emailAddress
+        textField.textContentType = .username
         textField.returnKeyType = UIReturnKeyType.continue
-        textField.autocorrectionType = .no
-        textField.autocapitalizationType = .none
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
     private let textField2: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = #colorLiteral(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
-        textField.textColor = .darkGray
+        textField.logInTF()
         textField.font = UIFont.systemFont(ofSize: 16)
-        textField.tintColor = UIColor(named: "blueVK")
-        textField.setLeftPaddingPoints(18)
         textField.layer.cornerRadius = 12
         textField.clipsToBounds = true
         textField.returnKeyType = UIReturnKeyType.done
-        textField.autocorrectionType = .no
-        textField.autocapitalizationType = .none
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.isHidden = true
         textField.isSecureTextEntry = true
         textField.isEnabled = false
+        textField.isHidden = true
+        textField.textContentType = .newPassword
         return textField
     }()
     
@@ -131,6 +135,8 @@ final class CustomAlert: UIView, Modal {
         textField.placeholder = textFieldPlaceholder
         if Checker.isValidEmail(email: text) {
             textField.text = text
+            textField.rightViewMode = .always
+            validEmailFlag = true
             textField2.isEnabled = true
             textField2.becomeFirstResponder()
         } else {
@@ -182,7 +188,7 @@ final class CustomAlert: UIView, Modal {
         textField.addTarget(self, action: #selector(text1Entered), for: .editingChanged)
         textField2.addTarget(self, action: #selector(text2Entered), for: .editingChanged)
         
-        dialogView.backgroundColor = #colorLiteral(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+        dialogView.backgroundColor = UIColor.AppColor.white
         dialogView.layer.cornerRadius = 26
         dialogView.clipsToBounds = true
         dialogView.translatesAutoresizingMaskIntoConstraints = false
@@ -263,16 +269,18 @@ private extension CustomAlert {
                 textField2.text = nil
                 textField2.becomeFirstResponder()
                 messageLabel.text = "Please confirm password"
+                textField2.placeholder = "Enter password again"
                 isFirstPasswordEntry = false
             } else {
                 if enteredEmail == email {
                     if enteredPassword == passw {
                         didEnterHandler?(email, passw)
-                        dismiss(animated: true)
+//                        dismiss(animated: true)
                     } else {
                         textField2.text = nil
                         textField2.becomeFirstResponder()
                         messageLabel.text = "Oops,\nplease confirm password"
+                        textField2.placeholder = "Enter password again"
                         isFirstPasswordEntry = false
                     }
                 }
@@ -281,7 +289,8 @@ private extension CustomAlert {
     }
 
     @objc private func text1Entered() {
-        titleLabel.text = "Register new account"
+        titleLabel.text = "Create new account"
+        isFirstPasswordEntry = true
         
         let rawEmail = textField.text?.trimmingCharacters(in: .whitespaces)
         
@@ -289,22 +298,32 @@ private extension CustomAlert {
             validEmailFlag = true
             messageLabel.text = "Enter strong password \nwith at least 6 characters, \none uppercase \nand one digit"
             textField2.isEnabled = true
+            textField.rightViewMode = .always
         } else {
             messageLabel.text = "Please enter valid email"
             textField2.isEnabled = false
+            textField.rightViewMode = .never
             return
         }
     }
     
     @objc private func text2Entered() {
-        titleLabel.text = "Register new account"
+        titleLabel.text = "Create new account"
         
         let rawPassword = textField2.text?.trimmingCharacters(in: .whitespaces)
         
         if Checker.isValidPassword(testStr: rawPassword) && validEmailFlag {
             rightActionButton.isEnabled = true
+            if isFirstPasswordEntry {
+                textField2.rightViewMode = .always
+            } else {
+                if enteredPassword == rawPassword {
+                    textField2.rightViewMode = .always
+                }
+            }
         } else {
             rightActionButton.isEnabled = false
+            textField2.rightViewMode = .never
         }
     }
     

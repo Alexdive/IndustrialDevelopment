@@ -11,5 +11,5 @@ import UIKit
 class PhotosViewModel: NSObject {
   
   let storage = PhotosStorage()
-  let backgroundColor: UIColor = .white
+  let backgroundColor: UIColor = UIColor.AppColor.white
 }

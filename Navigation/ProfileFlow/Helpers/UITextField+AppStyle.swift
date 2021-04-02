@@ -10,17 +10,16 @@ import UIKit
 
 // login textfield style
 extension UITextField {
-  func logInProperties(placeholder: String) {
-    self.backgroundColor = UIColor(named: "gray6")
-    self.placeholder = placeholder
+  func logInTF() {
+    self.backgroundColor = UIColor.AppColor.lightGray
     self.textColor = .darkGray
-    self.tintColor = UIColor(named: "blueVK")
+    self.tintColor = UIColor.AppColor.vkBlue
     self.setLeftPaddingPoints(12)
     self.layer.borderColor = UIColor.lightGray.cgColor
     self.autocapitalizationType = .none
     self.autocorrectionType = .no
     if #available(iOS 13.0, *) {
-        self.rightImage(UIImage(named: "checkmark")?.withTintColor(UIColor(named: "blueVK") ?? .systemBlue), imageWidth: 20, padding: 4)
+        self.rightImage(UIImage(named: "checkmark")?.withTintColor(UIColor.AppColor.vkBlue), imageWidth: 20, padding: 4)
     }
   }
 }

@@ -59,6 +59,8 @@
 		5075FCF02614600E004D2045 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCEE2614600E004D2045 /* Modal.swift */; };
 		5075FCF4261460C2004D2045 /* ButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FCF3261460C2004D2045 /* ButtonHelper.swift */; };
 		5075FD2426148CDA004D2045 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FD2326148CDA004D2045 /* Checker.swift */; };
+		5075FD5A2615FCBB004D2045 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FD592615FCBB004D2045 /* Color.swift */; };
+		5075FD60261607A8004D2045 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FD2326148CDA004D2045 /* Checker.swift */; };
 		509DE2A525650B1800E876CD /* UITextField+AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509DE2A425650B1800E876CD /* UITextField+AppStyle.swift */; };
 		509DE2A825650BB700E876CD /* UIImageView+Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509DE2A725650BB700E876CD /* UIImageView+Alpha.swift */; };
 		509DE2AB25650DA200E876CD /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509DE2AA25650DA200E876CD /* PhotosTableViewCell.swift */; };
@@ -107,6 +109,7 @@
 		5075FCEE2614600E004D2045 /* Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
 		5075FCF3261460C2004D2045 /* ButtonHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonHelper.swift; sourceTree = "<group>"; };
 		5075FD2326148CDA004D2045 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		5075FD592615FCBB004D2045 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		509DE2A425650B1800E876CD /* UITextField+AppStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+AppStyle.swift"; sourceTree = "<group>"; };
 		509DE2A725650BB700E876CD /* UIImageView+Alpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Alpha.swift"; sourceTree = "<group>"; };
 		509DE2AA25650DA200E876CD /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
@@ -227,14 +230,13 @@
 		5001CF3B2588E23C005CF7E6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				5075FD5D2616078F004D2045 /* CustomAlert */,
 				50406FDE255D5C0800B4E543 /* SetStatusButtonView.swift */,
 				509DE2A425650B1800E876CD /* UITextField+AppStyle.swift */,
 				509DE2A725650BB700E876CD /* UIImageView+Alpha.swift */,
 				5017A8D4255C112B000240C4 /* UIView+Style+AutoLayout.swift */,
 				5075FCF3261460C2004D2045 /* ButtonHelper.swift */,
-				5075FCED2614600E004D2045 /* CustomAlertView.swift */,
-				5075FCEE2614600E004D2045 /* Modal.swift */,
-				5075FD2326148CDA004D2045 /* Checker.swift */,
+				5075FD592615FCBB004D2045 /* Color.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -292,10 +294,20 @@
 			isa = PBXGroup;
 			children = (
 				5017A8D1255C1080000240C4 /* LogInViewController.swift */,
+				5075FD2326148CDA004D2045 /* Checker.swift */,
 				5001CF422588E2A8005CF7E6 /* ProfileView */,
 				5001CF3B2588E23C005CF7E6 /* Helpers */,
 			);
 			path = ProfileFlow;
+			sourceTree = "<group>";
+		};
+		5075FD5D2616078F004D2045 /* CustomAlert */ = {
+			isa = PBXGroup;
+			children = (
+				5075FCED2614600E004D2045 /* CustomAlertView.swift */,
+				5075FCEE2614600E004D2045 /* Modal.swift */,
+			);
+			path = CustomAlert;
 			sourceTree = "<group>";
 		};
 		509DE2AD2565344300E876CD /* PhotoGallery */ = {
@@ -542,6 +554,7 @@
 				5075FCF02614600E004D2045 /* Modal.swift in Sources */,
 				50492CF82611AA130094F179 /* UserModel.swift in Sources */,
 				50492CFC2611B0A60094F179 /* PlanetModel.swift in Sources */,
+				5075FD5A2615FCBB004D2045 /* Color.swift in Sources */,
 				504B0E09254D1EB1003D2A9A /* ProfileTableHeaderView.swift in Sources */,
 				504B0E0B254D1ED2003D2A9A /* ProfileViewController.swift in Sources */,
 				5075FD2426148CDA004D2045 /* Checker.swift in Sources */,
@@ -561,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5040980A257A51FB00AED984 /* FeedViewController.swift in Sources */,
+				5075FD60261607A8004D2045 /* Checker.swift in Sources */,
 				5040980B257A51FB00AED984 /* PhotosCollectionViewCell.swift in Sources */,
 				5040980C257A51FB00AED984 /* AppDelegate.swift in Sources */,
 				5040980D257A51FB00AED984 /* InfoViewController.swift in Sources */,

@@ -58,7 +58,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
   
   private lazy var statusTextField: UITextField = {
     let textField = UITextField()
-    textField.backgroundColor = .white
+    textField.backgroundColor = UIColor.AppColor.white
     textField.placeholder = "Add your status here"
     textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
     textField.makeRoundedCornerWithBorder(cornerRadius: 12, borderWidth: 1, borderColor: UIColor.black.cgColor)
@@ -102,7 +102,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     setupLayout()
     
-    self.backgroundColor = UIColor(named: "gray6")
+    self.backgroundColor = UIColor.AppColor.lightGray
 
     self.statusTextField.delegate = self
     
@@ -132,7 +132,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
       sender.backgroundColor = UIColor.darkGray
     }
     UIView.animate(withDuration: 0.2) {
-      sender.backgroundColor = UIColor(named: "blueVK")
+      sender.backgroundColor = UIColor.AppColor.vkBlue
     }
     statusTextField.resignFirstResponder()
     statusLabel.text = statusText
