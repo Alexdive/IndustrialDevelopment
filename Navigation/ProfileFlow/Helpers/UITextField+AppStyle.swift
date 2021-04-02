@@ -10,15 +10,17 @@ import UIKit
 
 // login textfield style
 extension UITextField {
-  func logInProperties(placeholder: String) {
-    self.toAutoLayout()
-    self.backgroundColor = UIColor(named: "gray6")
-    self.placeholder = placeholder
-    self.textColor = .black
-    self.tintColor = UIColor(named: "blueVK")
+  func logInTF() {
+    self.backgroundColor = UIColor.AppColor.lightGray
+    self.textColor = .darkGray
+    self.tintColor = UIColor.AppColor.vkBlue
     self.setLeftPaddingPoints(12)
     self.layer.borderColor = UIColor.lightGray.cgColor
     self.autocapitalizationType = .none
+    self.autocorrectionType = .no
+    if #available(iOS 13.0, *) {
+        self.rightImage(UIImage(named: "checkmark")?.withTintColor(UIColor.AppColor.vkBlue), imageWidth: 20, padding: 4)
+    }
   }
 }
 
@@ -29,4 +31,15 @@ extension UITextField {
     self.leftView = paddingView
     self.leftViewMode = .always
   }
+    
+    func rightImage(_ image: UIImage?, imageWidth: CGFloat, padding: CGFloat) {
+        let imageView = UIImageView(image: image)
+        imageView.frame = CGRect(x: 0, y: 0, width: imageWidth, height: frame.height)
+        imageView.contentMode = .center
+        
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: imageWidth + 2 * padding, height: frame.height))
+        containerView.addSubview(imageView)
+        rightView = containerView
+    }
+    
 }

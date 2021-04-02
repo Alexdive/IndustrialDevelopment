@@ -35,7 +35,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     return avatar
   }()
   
-  private lazy var nameLabel: UILabel = {
+  lazy var nameLabel: UILabel = {
     let label = UILabel()
     label.text = "Reef Manta"
     label.font = .boldSystemFont(ofSize: 18)
@@ -58,7 +58,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
   
   private lazy var statusTextField: UITextField = {
     let textField = UITextField()
-    textField.backgroundColor = .white
+    textField.backgroundColor = UIColor.AppColor.white
     textField.placeholder = "Add your status here"
     textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
     textField.makeRoundedCornerWithBorder(cornerRadius: 12, borderWidth: 1, borderColor: UIColor.black.cgColor)
@@ -85,7 +85,15 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     button.alpha = 0
     return button
   }()
-  
+    
+    lazy var signOutButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "person.crop.circle.badge.minus"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.tintColor = .black
+        return button
+    }()
+    
   //  getting the size for full screen avatar image
   private var avatarFrame: CGRect { return AVMakeRect(aspectRatio: avatarImageView.image!.size, insideRect: UIScreen.main.bounds) }
   
@@ -94,7 +102,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     setupLayout()
     
-    self.backgroundColor = UIColor(named: "gray6")
+    self.backgroundColor = UIColor.AppColor.lightGray
 
     self.statusTextField.delegate = self
     
@@ -124,7 +132,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
       sender.backgroundColor = UIColor.darkGray
     }
     UIView.animate(withDuration: 0.2) {
-      sender.backgroundColor = UIColor(named: "blueVK")
+      sender.backgroundColor = UIColor.AppColor.vkBlue
     }
     statusTextField.resignFirstResponder()
     statusLabel.text = statusText
@@ -209,6 +217,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     addSubview(statusLabel)
     addSubview(setStatusButton)
     addSubview(statusTextField)
+    addSubview(signOutButton)
     
     avatarImageView.snp.makeConstraints { (make) -> Void in
       self.avatarTopConstraint = make.top.equalToSuperview().offset(baseInset).constraint
@@ -220,6 +229,11 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
       make.top.equalToSuperview().offset(27)
       make.left.equalToSuperview().offset(avatarImageHeight + baseInset * 2)
       make.right.equalTo(self.snp_right).offset(-baseInset)
+    }
+    signOutButton.snp.makeConstraints {
+        $0.top.equalToSuperview().offset(baseInset)
+        $0.right.equalTo(nameLabel)
+        $0.width.height.equalTo(30)
     }
     setStatusButton.snp.makeConstraints { (make) in
       make.bottom.equalToSuperview().offset(-baseInset)

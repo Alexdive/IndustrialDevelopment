@@ -20,17 +20,16 @@ class ProfileNavCoordinator: NavCoordinator {
   func start() {
     let vc = LogInViewController()
     vc.coordinator = self
-    push(vc: vc, animated: false)
+    navigationController.setViewControllers([vc], animated: true)
   }
   
   func logIn() {
     let vc = ProfileViewController()
     vc.coordinator = self
-    push(vc: vc, animated: true)
+    navigationController.setViewControllers([vc], animated: true)
   }
   
   func openPhotoGallery() {
-    
     let vc = PhotosViewController()
     vc.vm = photoViewModel
     vc.coordinator = self

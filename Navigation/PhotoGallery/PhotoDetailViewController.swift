@@ -131,7 +131,7 @@ extension PhotoDetailViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let title = UILabel()
     title.text = "    Choose Filter"
-    title.textColor = UIColor(named: "blueVK")
+    title.textColor = UIColor.AppColor.vkBlue
     title.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
     return title
   }
@@ -166,7 +166,7 @@ extension PhotoDetailViewController: UITableViewDataSource {
     }
     cell.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     let backgroundView = UIView()
-    backgroundView.backgroundColor = UIColor(named: "blueVK")
+    backgroundView.backgroundColor = UIColor.AppColor.vkBlue
     cell.selectedBackgroundView = backgroundView
     return cell
   }

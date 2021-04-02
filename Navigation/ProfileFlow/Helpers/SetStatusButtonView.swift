@@ -15,7 +15,7 @@ class SetStatusButtonView: UIButton {
     self.setTitle("Set status", for: .normal)
     self.setTitleColor(.white, for: .normal)
     self.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-    self.backgroundColor = UIColor(named: "blueVK")
+    self.backgroundColor = UIColor.AppColor.vkBlue
     self.layer.cornerRadius = 14
     self.layer.shadowOffset = CGSize(width: 4, height: 4)
     self.layer.shadowRadius = 4

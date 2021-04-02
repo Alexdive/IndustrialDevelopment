@@ -37,7 +37,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
   
   // MARK: Layout
   func setupViews() {
-    contentView.backgroundColor = .white
+    contentView.backgroundColor = UIColor.AppColor.white
     contentView.addSubview(photoImageView)
     
     photoImageView.snp.makeConstraints { (make) in

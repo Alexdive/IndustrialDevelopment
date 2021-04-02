@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MainCoordinator: TabCoordinator {
-  
+    
+    var handle: AuthStateDidChangeListenerHandle?
+    
   var childCoordinators = [NavCoordinator]()
   
   var tabBarController: UITabBarController
@@ -32,7 +35,17 @@ class MainCoordinator: TabCoordinator {
     childCoordinators = [feedCoordinator, profileCoordinator]
     
     feedCoordinator.start()
-    profileCoordinator.start()
+    
+    handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+
+         if let user = user {
+             print("logged in user as \(user.email as Any)")
+            profileCoordinator.logIn()
+         } else {
+            print("no logged in user")
+            profileCoordinator.start()
+         }
+     }
  
     let controllers = [feedNavController, profileNavController]
     

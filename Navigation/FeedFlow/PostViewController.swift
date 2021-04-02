@@ -85,7 +85,7 @@ extension PostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let title = UILabel()
         title.text = "    Planet Tatuin residents:"
-        title.textColor = UIColor(named: "blueVK")
+        title.textColor = UIColor.AppColor.vkBlue
         title.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         return title
     }
