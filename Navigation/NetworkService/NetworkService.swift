@@ -10,7 +10,7 @@ import Foundation
 
 struct NetworkService {
     
-    static func fetchData(urlString: String?) {
+    static func fetchData(urlString: String?, completion: ((Data) -> Void)?) {
         if let urlString = urlString,
            let url = URL(string: urlString) {
             
@@ -32,9 +32,20 @@ struct NetworkService {
                     print("-------//-------")
                     print(String(data: data, encoding: .utf8)!)
                     
+                    if let completion = completion {
+                        completion(data)
+                    }
                 }
             }.resume()
-            
         }
+    }
+}
+
+extension NetworkService {
+    static func toObject(json: Data) throws -> Dictionary<String, Any>? {
+        return try JSONSerialization.jsonObject(
+            with: json,
+            options: .mutableContainers
+        ) as? [String: Any]
     }
 }

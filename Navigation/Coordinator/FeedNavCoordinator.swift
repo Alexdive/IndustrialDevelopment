@@ -17,12 +17,14 @@ class FeedNavCoordinator: NavCoordinator {
   
   func start() {
     let vc = FeedViewController()
+    vc.viewModel = ViewModel()
     vc.coordinator = self
     push(vc: vc, animated: false)
   }
   
   func showPost(post: PostTitle) {
     let vc = PostViewController()
+    vc.viewModel = PostViewModel()
     vc.coordinator = self
     vc.post = post
     push(vc: vc, animated: true)
