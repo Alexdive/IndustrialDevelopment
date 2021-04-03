@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum AppConfiguration: String, CaseIterable {
+    case first = "https://swapi.dev/api/people/1"
+    case second = "https://swapi.dev/api/people/2"
+    case third = "https://swapi.dev/api/people/3"
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
@@ -23,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     rootController.coordinator = coordinator
     
     coordinator?.start()
+    
+    let appConfig = AppConfiguration.allCases.randomElement()
+    NetworkService.fetchData(urlString: appConfig?.rawValue)
     
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = rootController

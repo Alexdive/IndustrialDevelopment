@@ -180,7 +180,6 @@ extension PhotoDetailViewController {
   
   func chooseFilterForRow(index: IndexPath) {
     let filter = filterItems[index.row]
-    print(filter)
     if let image = photo?.photo {
       imageProcessor.processImage(sourceImage: image, filter: filter) { (image) in
         photoImageView.image = image
